@@ -1,0 +1,26 @@
+.app-layout {
+    min-height: 100vh;
+    position: relative;
+}
+
+.main-content {
+    margin-top: var(--navbar-height);
+    min-height: calc(100vh - var(--navbar-height));
+    transition: margin-left var(--transition-base);
+    position: relative;
+    z-index: 1;
+}
+
+.main-sidebar-open {
+    margin-left: var(--sidebar-width);
+}
+
+.main-sidebar-closed {
+    margin-left: var(--sidebar-collapsed);
+}
+
+@media (max-width: 768px) {
+    .main-content {
+        margin-left: 0 !important;
+    }
+}

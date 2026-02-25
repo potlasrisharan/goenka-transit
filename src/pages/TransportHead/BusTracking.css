@@ -1,0 +1,141 @@
+.tracking-layout {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: var(--space-lg);
+    min-height: 550px;
+}
+
+.tracking-sidebar {
+    padding: var(--space-lg);
+}
+
+.tracking-sidebar h3 {
+    font-size: var(--fs-lg);
+    margin-bottom: var(--space-md);
+}
+
+.bus-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.bus-list-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: var(--space-md);
+    background: var(--bg-glass);
+    border: 1px solid transparent;
+    border-radius: var(--border-radius-md);
+    text-align: left;
+    transition: all var(--transition-fast);
+    width: 100%;
+}
+
+.bus-list-item:hover {
+    background: var(--bg-glass-hover);
+}
+
+.bus-list-item-active {
+    border-color: var(--accent-primary);
+    background: rgba(108, 92, 231, 0.08);
+}
+
+.bus-list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.bus-number-tag {
+    font-weight: 700;
+    font-size: var(--fs-sm);
+    color: var(--accent-primary);
+    background: rgba(108, 92, 231, 0.1);
+    padding: 2px 8px;
+    border-radius: 6px;
+}
+
+.bus-speed {
+    font-size: var(--fs-xs);
+    color: var(--accent-success);
+    font-weight: 600;
+}
+
+.bus-route-name {
+    font-size: var(--fs-xs);
+    color: var(--text-secondary);
+}
+
+.bus-driver-name {
+    font-size: var(--fs-xs);
+    color: var(--text-muted);
+}
+
+.tracking-map-area {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.tracking-map-area .map-container {
+    flex: 1;
+    min-height: 400px;
+}
+
+.route-info-bar {
+    display: flex;
+    gap: var(--space-lg);
+    padding: var(--space-md) var(--space-lg);
+    background: rgba(108, 92, 231, 0.06);
+    border-top: 1px solid var(--border-glass);
+}
+
+.route-info-item {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.rib-label {
+    font-size: var(--fs-xs);
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.rib-value {
+    font-size: var(--fs-sm);
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+/* Leaflet dark theme overrides */
+.leaflet-popup-content-wrapper {
+    background: var(--bg-secondary) !important;
+    color: var(--text-primary) !important;
+    border-radius: var(--border-radius-md) !important;
+    border: 1px solid var(--border-glass) !important;
+}
+
+.leaflet-popup-tip {
+    background: var(--bg-secondary) !important;
+}
+
+.leaflet-popup-content {
+    margin: 10px 14px !important;
+    font-family: var(--font-body) !important;
+    font-size: var(--fs-sm) !important;
+}
+
+@media (max-width: 768px) {
+    .tracking-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .route-info-bar {
+        flex-wrap: wrap;
+        gap: var(--space-md);
+    }
+}

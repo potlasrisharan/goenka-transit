@@ -1,0 +1,203 @@
+/* Driver Details / Management */
+.dd-card {
+    padding: var(--space-lg);
+    position: relative;
+    overflow: hidden;
+}
+
+.dd-status-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+}
+
+.dd-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    margin-bottom: var(--space-md);
+}
+
+.dd-header h3 {
+    font-size: var(--fs-lg);
+}
+
+.dd-edit-btn {
+    margin-left: auto;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(108, 92, 231, 0.1);
+    border: 1px solid rgba(108, 92, 231, 0.2);
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.2s;
+}
+
+.dd-edit-btn:hover {
+    background: rgba(108, 92, 231, 0.25);
+    transform: scale(1.1);
+}
+
+.dd-info {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.dd-divider {
+    border-top: 1px solid var(--border-glass);
+    padding-top: var(--space-sm);
+    margin-top: var(--space-xs);
+}
+
+/* Edit form */
+.dd-edit-form {
+    padding-top: var(--space-sm);
+}
+
+.dd-edit-form h4 {
+    margin-bottom: var(--space-md);
+    font-size: var(--fs-md);
+    color: var(--accent-primary);
+}
+
+.dd-form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-sm);
+}
+
+.dd-field {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.dd-field label {
+    font-size: var(--fs-xs);
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 600;
+}
+
+.dd-field input,
+.dd-field select {
+    padding: 8px 12px;
+    background: var(--bg-secondary, rgba(0, 0, 0, 0.2));
+    color: var(--text-primary);
+    border: 1px solid var(--border-glass);
+    border-radius: var(--border-radius-sm, 6px);
+    font-size: var(--fs-sm);
+    transition: border-color 0.2s;
+}
+
+.dd-field input:focus,
+.dd-field select:focus {
+    border-color: var(--accent-primary);
+    outline: none;
+}
+
+.dd-edit-actions {
+    display: flex;
+    gap: var(--space-sm);
+    margin-top: var(--space-md);
+}
+
+.dd-save-btn {
+    padding: 8px 20px;
+    background: #00b894;
+    color: #fff;
+    border: none;
+    border-radius: var(--border-radius-sm, 6px);
+    font-weight: 600;
+    font-size: var(--fs-sm);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.dd-save-btn:hover {
+    background: #00a884;
+}
+
+.dd-cancel-btn {
+    padding: 8px 20px;
+    background: transparent;
+    color: var(--text-secondary);
+    border: 1px solid var(--border-glass);
+    border-radius: var(--border-radius-sm, 6px);
+    font-size: var(--fs-sm);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.dd-cancel-btn:hover {
+    background: rgba(255, 255, 255, 0.04);
+}
+
+/* Add Driver button */
+.dd-add-btn {
+    padding: 10px 24px;
+    background: var(--accent-primary, #6c5ce7);
+    color: #fff;
+    border: none;
+    border-radius: var(--border-radius-md, 8px);
+    font-weight: 600;
+    font-size: var(--fs-sm);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.dd-add-btn:hover {
+    filter: brightness(1.15);
+}
+
+/* Modal */
+.dd-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.dd-modal {
+    width: 90%;
+    max-width: 520px;
+    padding: var(--space-xl);
+}
+
+.dd-modal h3 {
+    margin-bottom: var(--space-lg);
+    font-size: var(--fs-xl);
+}
+
+/* Toast */
+.dd-toast {
+    position: fixed;
+    bottom: var(--space-xl);
+    right: var(--space-xl);
+    padding: var(--space-md) var(--space-xl);
+    background: rgba(0, 184, 148, 0.15);
+    border: 1px solid rgba(0, 184, 148, 0.4);
+    color: var(--accent-success);
+    border-radius: var(--border-radius-md, 8px);
+    font-weight: 600;
+    z-index: 200;
+    backdrop-filter: blur(10px);
+}
+
+@media (max-width: 600px) {
+    .dd-form-grid {
+        grid-template-columns: 1fr;
+    }
+}

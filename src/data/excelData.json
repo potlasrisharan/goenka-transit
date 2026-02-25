@@ -1,0 +1,1016 @@
+[
+  {
+    "id": "R01",
+    "number": "01",
+    "name": "Route 01 – ROHINI WEST METRO STATION, N.D.",
+    "startPoint": "ROHINI WEST METRO STATION, N.D.",
+    "city": "New Delhi",
+    "color": "#6c5ce7",
+    "driverName": "SHASHI LAL",
+    "driverPhone": "",
+    "conductorName": "RAHUL SAINI",
+    "conductorPhone": "",
+    "stops": [
+      {
+        "name": "ROHINI WEST METRO, NEW DELHI",
+        "time": "06.50 AM",
+        "order": 1
+      },
+      {
+        "name": "ROHINI EAST METRO, NEW DELHI",
+        "time": "06.52 AM",
+        "order": 2
+      },
+      {
+        "name": "PITAMPURA METRO STATION, NEW DELHI",
+        "time": "06.58 AM",
+        "order": 3
+      },
+      {
+        "name": "KOHAT ENCLAVE METRO STATION, NEW DELHI",
+        "time": "07.01 AM",
+        "order": 4
+      },
+      {
+        "name": "NETAJI SHUBHASH PLACE, NEW DELHI",
+        "time": "07.05 AM",
+        "order": 5
+      },
+      {
+        "name": "WAZIRPUR BUS DEPOT, NEW DELHI",
+        "time": "07.07 AM",
+        "order": 6
+      },
+      {
+        "name": "BRITANIA CHOWK, NEW DELHI",
+        "time": "07.08 AM",
+        "order": 7
+      },
+      {
+        "name": "PUNJABI BAGH CHOWK, NEW DELHI",
+        "time": "07.10 AM",
+        "order": 8
+      },
+      {
+        "name": "PUNJABI BAGH CLUB, NEW DELHI",
+        "time": "07.11 AM",
+        "order": 9
+      },
+      {
+        "name": "RAJOURI GARDEN, NEW DELHI",
+        "time": "07.15 AM",
+        "order": 10
+      },
+      {
+        "name": "MARBLE MARKET, RAJOURI GARDEN, N.D.",
+        "time": "07.16 AM",
+        "order": 11
+      },
+      {
+        "name": "DELHI CANT METRO STATION, N.D.",
+        "time": "07.25 AM",
+        "order": 12
+      },
+      {
+        "name": "G D Goenka Education City",
+        "time": "09.00 AM",
+        "order": 13
+      }
+    ]
+  },
+  {
+    "id": "R02",
+    "number": "02",
+    "name": "Route 02 – R.K. ASHRAM MARG (CANNAUGHT PLACE), N.D.",
+    "startPoint": "R.K. ASHRAM MARG (CANNAUGHT PLACE), N.D.",
+    "city": "New Delhi",
+    "color": "#00b894",
+    "driverName": "RUMAL SINGH",
+    "driverPhone": "",
+    "conductorName": "SC DAS ADHIKARI",
+    "conductorPhone": "",
+    "stops": [
+      {
+        "name": "R.K. ASHRAM METRO STATION, NEW DELHI",
+        "time": "06.55 AM",
+        "order": 1
+      },
+      {
+        "name": "KAROL BAGH METRO STATION, NEW DELHI",
+        "time": "07.05 AM",
+        "order": 2
+      },
+      {
+        "name": "RAJENDRA PALACE METRO STATION, N.D.",
+        "time": "07.07 AM",
+        "order": 3
+      },
+      {
+        "name": "SATYANIKETAN, NEW DELHI",
+        "time": "07.20 AM",
+        "order": 4
+      },
+      {
+        "name": "MOTIBAGH BUS STOP, NEW DELHI",
+        "time": "07.25 AM",
+        "order": 5
+      },
+      {
+        "name": "VASANT VIHAR VILLAGE, NEW DELHI",
+        "time": "07.30 AM",
+        "order": 6
+      },
+      {
+        "name": "SUBRATO PARK, NEW DELHI",
+        "time": "07.32 AM",
+        "order": 7
+      },
+      {
+        "name": "MAHIPALPUR, NEW DELHI",
+        "time": "07.40 AM",
+        "order": 8
+      },
+      {
+        "name": "RANGPURI, MAHIPALPUR, NEW DELHI",
+        "time": "07.43 AM",
+        "order": 9
+      },
+      {
+        "name": "RAJOKARI, NEW DELHI",
+        "time": "07.48 AM",
+        "order": 10
+      },
+      {
+        "name": "SECTOR-31, RED LIGHT, GURUGRAM",
+        "time": "08.02 AM",
+        "order": 11
+      },
+      {
+        "name": "JHARSA CHOWK, GURUGRAM",
+        "time": "08.05 AM",
+        "order": 12
+      },
+      {
+        "name": "RAJIV CHOWK, GURUGRAM",
+        "time": "08.08 AM",
+        "order": 13
+      },
+      {
+        "name": "JMD GARDEN, SOHNA RAOD, GURUGRAM",
+        "time": "08.10 AM",
+        "order": 14
+      },
+      {
+        "name": "SUBHASH CHOWK, SOHNA ROAD, GURUGRAM",
+        "time": "08.12 AM",
+        "order": 15
+      },
+      {
+        "name": "MALIBU TOWNE, GURUGRAM SOHNA ROAD",
+        "time": "08.13 AM",
+        "order": 16
+      },
+      {
+        "name": "OMEXE MALL, SOHNA ROAD, GURUGRAM",
+        "time": "08.15 AM",
+        "order": 17
+      },
+      {
+        "name": "UPPAL SOUTHEND, GURUGRAM",
+        "time": "08.16 AM",
+        "order": 18
+      },
+      {
+        "name": "UPPAL SOUTHEND, GURUGRAM",
+        "time": "08.17 AM",
+        "order": 19
+      },
+      {
+        "name": "VATIKA BUSSINESS PARK, MAIN SOHNA ROAD, GURUGRAM",
+        "time": "08.18 AM",
+        "order": 20
+      },
+      {
+        "name": "VATIKA CITY RED LIGHT, GURUGRAM",
+        "time": "08.19 AM",
+        "order": 21
+      },
+      {
+        "name": "G D Goenka Education City",
+        "time": "09.00 AM",
+        "order": 22
+      }
+    ]
+  },
+  {
+    "id": "R03",
+    "number": "03",
+    "name": "Route 03 – NEHRU PLACE, NEW DELHI",
+    "startPoint": "NEHRU PLACE, NEW DELHI",
+    "city": "New Delhi",
+    "color": "#e17055",
+    "driverName": "ANIL KUMAR ANIL SHARMA",
+    "driverPhone": "+91 7303991843",
+    "conductorName": "VIJAY MORYA",
+    "conductorPhone": "+91 9650863415",
+    "stops": [
+      {
+        "name": "PAMPOS ENCLAVE, NEW DELHI",
+        "time": "06.40 AM",
+        "order": 1
+      },
+      {
+        "name": "NSIC OKHLA METRO STATION, N.D.",
+        "time": "06.45 AM",
+        "order": 2
+      },
+      {
+        "name": "LAJPAT NAGAR, NEW DELHI",
+        "time": "06.52 AM",
+        "order": 3
+      },
+      {
+        "name": "MOOLCHAND METRO STATION, NEW DELHI",
+        "time": "06.55 AM",
+        "order": 4
+      },
+      {
+        "name": "CHIRAG DELHI, N.D.",
+        "time": "07.00 AM",
+        "order": 5
+      },
+      {
+        "name": "PANCHSHEEL METRO STATION, N.D.",
+        "time": "07.03 AM",
+        "order": 6
+      },
+      {
+        "name": "HAUZ KHAS METRO STATION, N.D.",
+        "time": "07.05 AM",
+        "order": 7
+      },
+      {
+        "name": "CAPITAL COURT MUNIRKA, NEW DELHI",
+        "time": "07.10 AM",
+        "order": 8
+      },
+      {
+        "name": "VASANT VIHAR POLICE STATION, N.D.",
+        "time": "07.13 AM",
+        "order": 9
+      },
+      {
+        "name": "JNU, NEW DELHI",
+        "time": "07.15 AM",
+        "order": 10
+      },
+      {
+        "name": "KISHANGARH, NEW DELHI",
+        "time": "07.25 AM",
+        "order": 11
+      },
+      {
+        "name": "CHATTERPUR METRO STATION, N.D.",
+        "time": "07.30 AM",
+        "order": 12
+      },
+      {
+        "name": "NEW MANLAPURI, NEW DELHI",
+        "time": "07.35 AM",
+        "order": 13
+      },
+      {
+        "name": "SULTANPUR METRO STATION, N.D.",
+        "time": "07.38 AM",
+        "order": 14
+      },
+      {
+        "name": "GHITORNI METRO STATION, N.D.",
+        "time": "07.44 AM",
+        "order": 15
+      },
+      {
+        "name": "HOTEL HYATT, SECTOR 66, GURUGRAM",
+        "time": "08.10 AM",
+        "order": 16
+      },
+      {
+        "name": "PARAS TRINITY, SECTOR 60, GURUGRAM",
+        "time": "08.15 AM",
+        "order": 17
+      },
+      {
+        "name": "ANSAL ASSENCIA, SECTOR-67, GURUGRAM",
+        "time": "08.20 AM",
+        "order": 18
+      },
+      {
+        "name": "G D Goenka Education City",
+        "time": "09.00 AM",
+        "order": 19
+      }
+    ]
+  },
+  {
+    "id": "R04",
+    "number": "04",
+    "name": "Route 04 – CHATTERPUR METRO STATION (NEW DELHI)",
+    "startPoint": "CHATTERPUR METRO STATION (NEW DELHI)",
+    "city": "New Delhi",
+    "color": "#0984e3",
+    "driverName": "RAMVAKIL",
+    "driverPhone": "+91 9557591338",
+    "conductorName": "VIRENDER",
+    "conductorPhone": "+91 9971971123",
+    "stops": [
+      {
+        "name": "VASANT KUNJ, NEW DELHI",
+        "time": "06.55 AM",
+        "order": 1
+      },
+      {
+        "name": "MASOODPUR, VASANT KUNJ, NEW DELHI",
+        "time": "07.00 AM",
+        "order": 2
+      },
+      {
+        "name": "CHATTERPUR METRO STATION, N.D.",
+        "time": "07.10 AM",
+        "order": 3
+      },
+      {
+        "name": "NEW MANLAPURI, NEW DELHI",
+        "time": "07.15 AM",
+        "order": 4
+      },
+      {
+        "name": "SULTANPUR METRO STATION, N.D.",
+        "time": "07.16 AM",
+        "order": 5
+      },
+      {
+        "name": "GHITORNI VILLAGE, NEW DELHI",
+        "time": "07.20 AM",
+        "order": 6
+      },
+      {
+        "name": "NATHUPUR, DLF PHASE 3, GURUGRAM",
+        "time": "07.25 AM",
+        "order": 7
+      },
+      {
+        "name": "DRONACHARYA METRO STATION, GURUGRAM",
+        "time": "07.35 AM",
+        "order": 8
+      },
+      {
+        "name": "DLF CITY COURT SECTOR-24, GURUGRAM",
+        "time": "07.38 AM",
+        "order": 9
+      },
+      {
+        "name": "SIKANDERPUR METRO STATION, GURUGRAM",
+        "time": "07.40 AM",
+        "order": 10
+      },
+      {
+        "name": "DLF PHASE-01 RAPID METRO, GURUGRAM",
+        "time": "07.45 AM",
+        "order": 11
+      },
+      {
+        "name": "SECTOR 42-43 RAPID METRO, GURUGRAM",
+        "time": "07.50 AM",
+        "order": 12
+      },
+      {
+        "name": "GENPECT, SECTOR-43, GURUGRAM",
+        "time": "07.52 AM",
+        "order": 13
+      },
+      {
+        "name": "SECTOR 53-54 RAPID METRO STATION, GURUGRAM",
+        "time": "07.55 AM",
+        "order": 14
+      },
+      {
+        "name": "SUNCITY, SECTOR 54, GURUGRAM",
+        "time": "07.57 AM",
+        "order": 15
+      },
+      {
+        "name": "AIT CHOWK, GURUGRAM",
+        "time": "08.00 AM",
+        "order": 16
+      },
+      {
+        "name": "SECTOR 55-56 REPID METRO STATION, GURUGRAM",
+        "time": "08.01 AM",
+        "order": 17
+      },
+      {
+        "name": "KENDRIYA VIHAR, SECTOR-56, GURUGRAM",
+        "time": "08.03 AM",
+        "order": 18
+      },
+      {
+        "name": "HONG KONG MARKET, GURUGRAM",
+        "time": "08.05 AM",
+        "order": 19
+      },
+      {
+        "name": "POINEER PARK, SECTOR-61, GURUGRAM",
+        "time": "08.10 AM",
+        "order": 20
+      },
+      {
+        "name": "WORLD MARK, SECTOR 60, GURUGRAM",
+        "time": "08.15 AM",
+        "order": 21
+      },
+      {
+        "name": "M3M MERLIN, SECTOR-67, GURUGRAM",
+        "time": "08.17 AM",
+        "order": 22
+      },
+      {
+        "name": "ANSAL ASSENCIA, SECTOR-67, GURUGRAM",
+        "time": "08.20 AM",
+        "order": 23
+      },
+      {
+        "name": "G D Goenka Education City",
+        "time": "09.00 AM",
+        "order": 24
+      }
+    ]
+  },
+  {
+    "id": "R05",
+    "number": "05",
+    "name": "Route 05 – DISTRICT CENTER JANAKPURI VIA-DWARKA, NEW DELHI",
+    "startPoint": "DISTRICT CENTER JANAKPURI VIA-DWARKA, NEW DELHI",
+    "city": "New Delhi",
+    "color": "#fdcb6e",
+    "driverName": "BACCHU SINGH",
+    "driverPhone": "+91 9311210008",
+    "conductorName": "GOVIND",
+    "conductorPhone": "+91 9634759519",
+    "stops": [
+      {
+        "name": "DISTRICT CENTER JANAKPURI, NEW DELHI",
+        "time": "06.55 AM",
+        "order": 1
+      },
+      {
+        "name": "UTTAM NAGAR, BUS TERMINAL, NEW DELHI",
+        "time": "07.00 AM",
+        "order": 2
+      },
+      {
+        "name": "DABRI MORE, NEW DELHI",
+        "time": "07.10 AM",
+        "order": 3
+      },
+      {
+        "name": "POWER HOUSE DWARKA, NEW DELHI",
+        "time": "07.18 AM",
+        "order": 4
+      },
+      {
+        "name": "BHAGAT CHANDRA HOSPITAL, DWARKA, NEW DELHI",
+        "time": "07.22 AM",
+        "order": 5
+      },
+      {
+        "name": "SECTOR-1, DWARKA, NEW DELHI",
+        "time": "07.25 AM",
+        "order": 6
+      },
+      {
+        "name": "DWARK SEC-6-7 RED LIGHT, DWARKA, NEW DELHI",
+        "time": "07.28 AM",
+        "order": 7
+      },
+      {
+        "name": "DWARKA SECTOR 8-9 METRO STATION, NEW DELHI",
+        "time": "07.30 AM",
+        "order": 8
+      },
+      {
+        "name": "PARAMOUNT SCHOOL SECTOR-22, NEW DELHI",
+        "time": "07.38 AM",
+        "order": 9
+      },
+      {
+        "name": "G D Goenka Education City",
+        "time": "09.00 AM",
+        "order": 10
+      }
+    ]
+  },
+  {
+    "id": "R06",
+    "number": "06",
+    "name": "Route 06 – DWARKA MORE, NEW DELHI",
+    "startPoint": "DWARKA MORE, NEW DELHI",
+    "city": "New Delhi",
+    "color": "#e84393",
+    "driverName": "SATBIR SHARMA",
+    "driverPhone": "+91 7011563329",
+    "conductorName": "MAAN SINGH",
+    "conductorPhone": "+91 7834813540",
+    "stops": [
+      {
+        "name": "DWARKA MORE, DWARKA, NEW DELHI",
+        "time": "07.00 AM",
+        "order": 1
+      },
+      {
+        "name": "SECTOR 3-4, RED LIGHT, DWARKA, NEW DELHI",
+        "time": "07.10 AM",
+        "order": 2
+      },
+      {
+        "name": "SECTOR 12, RED LIGHT, DWARKA, NEW DELHI",
+        "time": "07.13 AM",
+        "order": 3
+      },
+      {
+        "name": "ASHIRWAD CHOWK, SECTOR-04/05, DWARKA, NEW DELHI",
+        "time": "07.20 AM",
+        "order": 4
+      },
+      {
+        "name": "SECTOR 10 MARKET, DWARKA, NEW DELHI",
+        "time": "07.23 AM",
+        "order": 5
+      },
+      {
+        "name": "SECTOR 08 & 09, DTC DEPOT, DWARKA, NEW DELHI",
+        "time": "07.28 AM",
+        "order": 6
+      },
+      {
+        "name": "SECTOR 08 & 09, METRO STATION, DWARKA, N.D.",
+        "time": "07.30 AM",
+        "order": 7
+      },
+      {
+        "name": "SECTOR 21 METRO STATION, DWARKA, NEW DELHI",
+        "time": "07.40 AM",
+        "order": 8
+      },
+      {
+        "name": "SAMALAKHA RED LIGHT, NEW DELHI",
+        "time": "07.45 AM",
+        "order": 9
+      },
+      {
+        "name": "G D Goenka Education City",
+        "time": "09.00 AM",
+        "order": 10
+      }
+    ]
+  },
+  {
+    "id": "R07",
+    "number": "07",
+    "name": "Route 07 – NAJAFGARH VIA PALAM VIHAR ROUTE",
+    "startPoint": "NAJAFGARH VIA PALAM VIHAR ROUTE",
+    "city": "New Delhi",
+    "color": "#00cec9",
+    "driverName": "VINOD",
+    "driverPhone": "+91 9468032912",
+    "conductorName": "DINESH",
+    "conductorPhone": "+91 7988985801",
+    "stops": [
+      {
+        "name": "DHANSA METRO STATION, NAJAFGARH, NEW DELHI",
+        "time": "07.05 AM",
+        "order": 1
+      },
+      {
+        "name": "BAHADURGARH MORE, NEAR PETROL PUMP, NAJAFGARH",
+        "time": "07.07 AM",
+        "order": 2
+      },
+      {
+        "name": "DELHI GATE, NAJAFGARH, NEW DELHI",
+        "time": "07.15 AM",
+        "order": 3
+      },
+      {
+        "name": "CHAWALA STAND NAJAFGARH, NEW DELHI",
+        "time": "07.16 AM",
+        "order": 4
+      },
+      {
+        "name": "NEW ROSHANPURA, CHAWLA NAJAFGARH ROAD",
+        "time": "07.20 AM",
+        "order": 5
+      },
+      {
+        "name": "DEENPUR, NEW DELHI",
+        "time": "07.25 AM",
+        "order": 6
+      },
+      {
+        "name": "CHHAWLA VILLAGE, NEW DELHI",
+        "time": "07.30 AM",
+        "order": 7
+      },
+      {
+        "name": "BAJGHERA VILLAGE NEAR ORCHID INTERNATION SCHOOL, GURGAON",
+        "time": "07.37 AM",
+        "order": 8
+      },
+      {
+        "name": "MAHINDRA AURA APPT. BAJGHERA VILLAGE, GURUGRAM",
+        "time": "07.42 AM",
+        "order": 9
+      },
+      {
+        "name": "KRISHNA CHOWK, PALAM VIHAR, GURUGRAM",
+        "time": "07.43 AM",
+        "order": 10
+      },
+      {
+        "name": "SPENISH COURT, SECTOR 23, PALAM VIHAR, GURUGRAM",
+        "time": "07.45 AM",
+        "order": 11
+      },
+      {
+        "name": "COLUMBIA ASIA CIRCLE, PALAM VIHAR, GURUGRAM",
+        "time": "07.49 AM",
+        "order": 12
+      },
+      {
+        "name": "SECTOR 23, GATE NO. 03, PALAM VIHAR, GURUGRAM",
+        "time": "07.50 AM",
+        "order": 13
+      },
+      {
+        "name": "SECTOR 23, GATE NO. 01, PALAM VIHAR, GURUGRAM",
+        "time": "07.52 AM",
+        "order": 14
+      },
+      {
+        "name": "SECTOR 22, DEVILAL PARK, PALAM VIHAR, GURUGRAM",
+        "time": "07.53 AM",
+        "order": 15
+      },
+      {
+        "name": "SECTOR 22, MAIN MARKET, PALAM VIHAR, GURUGRAM",
+        "time": "07.55 AM",
+        "order": 16
+      },
+      {
+        "name": "ATUL KATARIA CHOWK, SECTOR 17, GURUGRAM",
+        "time": "08.07 AM",
+        "order": 17
+      },
+      {
+        "name": "MDI, CHOWK, GURUGRAM",
+        "time": "08.10 AM",
+        "order": 18
+      },
+      {
+        "name": "G D Goenka Education City",
+        "time": "09.00 AM",
+        "order": 19
+      }
+    ]
+  },
+  {
+    "id": "R08",
+    "number": "08",
+    "name": "Route 08 – ASHOK VIHAR PHASE-III, GURGAON",
+    "startPoint": "ASHOK VIHAR PHASE-III, GURGAON",
+    "city": "Gurugram",
+    "color": "#a29bfe",
+    "driverName": "NARESH KUMAR",
+    "driverPhone": "+91 8059088438",
+    "conductorName": "PRAVESH KUMAR",
+    "conductorPhone": "+91 7988302039",
+    "stops": [
+      {
+        "name": "ASHOK VIHAR, PHASE-III, GURUGRAM",
+        "time": "07.50 AM",
+        "order": 1
+      },
+      {
+        "name": "SECTOR 05 CIRCLE, GURUGRAM",
+        "time": "07.55 AM",
+        "order": 2
+      },
+      {
+        "name": "BABA PRAKASHPURI CHOWK, GURUGRAM",
+        "time": "07.00 AM",
+        "order": 3
+      },
+      {
+        "name": "MATA CHINTPURNI MANDIR, GURUGRAM",
+        "time": "08.02 AM",
+        "order": 4
+      },
+      {
+        "name": "HARISH BAKERY, SECTOR-07, GURUGRAM",
+        "time": "08.10 AM",
+        "order": 5
+      },
+      {
+        "name": "RAJMAHAL HOTEL, COLONY MORE, GURUGRAM",
+        "time": "08.12 AM",
+        "order": 6
+      },
+      {
+        "name": "SHIV MURTI, MAIN SADAR MARKET ROAD, GURUGRAM",
+        "time": "08.14 AM",
+        "order": 7
+      },
+      {
+        "name": "SOHNA CHOWK, GURUGRAM",
+        "time": "08.19 AM",
+        "order": 8
+      },
+      {
+        "name": "COMMISSIONER OFFICE, GURUGRAM",
+        "time": "08.22 AM",
+        "order": 9
+      },
+      {
+        "name": "G D Goenka Education City",
+        "time": "09.00 AM",
+        "order": 10
+      }
+    ]
+  },
+  {
+    "id": "R09",
+    "number": "09",
+    "name": "Route 09 – HUDA CITY CENTER METRO STATION, GURGAON",
+    "startPoint": "HUDA CITY CENTER METRO STATION, GURGAON",
+    "city": "Gurugram",
+    "color": "#fab1a0",
+    "driverName": "NEERAJ",
+    "driverPhone": "+91 9588146175",
+    "conductorName": "SRIRAM",
+    "conductorPhone": "+91 9918663271",
+    "stops": [
+      {
+        "name": "MILLENIUM CITY CENTRE METRO, NEAR FORTIS EMERGENCY GATE",
+        "time": "07.40 AM",
+        "order": 1
+      },
+      {
+        "name": "SECTOR 40 RED LIGHT, GURUGRAM",
+        "time": "07.50 AM",
+        "order": 2
+      },
+      {
+        "name": "CYBER PARK, SECTOR 46, GURUGRAM",
+        "time": "07.52 AM",
+        "order": 3
+      },
+      {
+        "name": "ISCKON TEMPLE, SECTOR 46, GURUGRAM",
+        "time": "07.56 AM",
+        "order": 4
+      },
+      {
+        "name": "SECTOR 52, GURUGRAM",
+        "time": "08.00 AM",
+        "order": 5
+      },
+      {
+        "name": "ARTEMIS HOSPITAL, GURUGRAM",
+        "time": "08.02 AM",
+        "order": 6
+      },
+      {
+        "name": "WHITE HOUSE, SECTOR 57, GURUGRAM",
+        "time": "08.04 AM",
+        "order": 7
+      },
+      {
+        "name": "SECTOR 57, BOOM PLAZA, GURUGRAM",
+        "time": "08.07 AM",
+        "order": 8
+      },
+      {
+        "name": "ST. XAVIER SCHOOL, SECTOR 56, GURUGRAM",
+        "time": "08.15 AM",
+        "order": 9
+      },
+      {
+        "name": "MGF EMMAR, PALM DRIVE, SECTOR-66, GURUGRAM",
+        "time": "08.18 AM",
+        "order": 10
+      },
+      {
+        "name": "VATIKA CITY, SECTOR-49 GURUGRAM",
+        "time": "08.19 AM",
+        "order": 11
+      },
+      {
+        "name": "G D Goenka Education City",
+        "time": "09.00 AM",
+        "order": 12
+      }
+    ]
+  },
+  {
+    "id": "R10",
+    "number": "10",
+    "name": "Route 10 – SECTOR 91-92, 83-84 MANESAR, GURGAON",
+    "startPoint": "SECTOR 91-92, 83-84 MANESAR, GURGAON",
+    "city": "Gurugram",
+    "color": "#55efc4",
+    "driverName": "MAHENDER",
+    "driverPhone": "+91 7056574055",
+    "conductorName": "SANTOSH",
+    "conductorPhone": "+91 9211528110",
+    "stops": [
+      {
+        "name": "SARE HOME SEC.-92, MAIN ROAD GURUGRAM",
+        "time": "07.20 AM",
+        "order": 1
+      },
+      {
+        "name": "DLF HEIGHTS SEC.-91, MAIN ROAD GURUGRAM",
+        "time": "07.30 AM",
+        "order": 2
+      },
+      {
+        "name": "SEC.- 84, BADA CHOWK, MAIN ROAD GURUGRAM",
+        "time": "07.34 AM",
+        "order": 3
+      },
+      {
+        "name": "CIRCLE-03 SEC.- 84 MAIN ROAD, MAIN ROAD GURUGRAM",
+        "time": "07.42 AM",
+        "order": 4
+      },
+      {
+        "name": "PARK VIEW SPA SIGNATURE, SEC.- 81, MAIN ROAD, GURUGRAM",
+        "time": "07.45 AM",
+        "order": 5
+      },
+      {
+        "name": "SAPPHIRE MALL, SEC.-83, MAIN ROAD GURUGRAM",
+        "time": "07.50 AM",
+        "order": 6
+      },
+      {
+        "name": "VATIKA INDIA NEXT, SEC.-82, MAIN ROAD GURUGRAM",
+        "time": "07.55 AM",
+        "order": 7
+      },
+      {
+        "name": "POLICE STATION, NEAR HYATT REGENCY, GURUGRAM",
+        "time": "08.00 AM",
+        "order": 8
+      },
+      {
+        "name": "SECTOR 77, SPR, MAIN ROAD GURUGRAM",
+        "time": "08.05 AM",
+        "order": 9
+      },
+      {
+        "name": "SECTOR 75A, SPR, MAIN ROAD GURUGRAM",
+        "time": "08.10 AM",
+        "order": 10
+      },
+      {
+        "name": "SECTOR 69, SOUTHERN PERIPHERAL ROAD,MAIN ROAD GURUGRAM",
+        "time": "08.15 AM",
+        "order": 11
+      },
+      {
+        "name": "SECTOR 70, SOUTHERN PERIPHERAL ROAD,MAIN ROAD GURUGRAM",
+        "time": "08.18 AM",
+        "order": 12
+      },
+      {
+        "name": "VATIKA CITY RED LIGHT, MAIN ROAD GURUGRAM",
+        "time": "08.20 AM",
+        "order": 13
+      },
+      {
+        "name": "BADSHAHPUR, MAIN ROAD GURUGRAM",
+        "time": "08.22 AM",
+        "order": 14
+      },
+      {
+        "name": "G D Goenka Education City",
+        "time": "09.00 AM",
+        "order": 15
+      }
+    ]
+  },
+  {
+    "id": "R11",
+    "number": "11",
+    "name": "Route 11 – BALLABHGARH VIA FARIDABAD",
+    "startPoint": "BALLABHGARH VIA FARIDABAD",
+    "city": "Faridabad",
+    "color": "#74b9ff",
+    "driverName": "BALDEV",
+    "driverPhone": "+91 9458856713",
+    "conductorName": "PREMRAJ",
+    "conductorPhone": "+91 8607542254",
+    "stops": [
+      {
+        "name": "SIKIRI, FARIDABAD",
+        "time": "07.05 AM",
+        "order": 1
+      },
+      {
+        "name": "JHAR SAINTALI, FARIDABAD",
+        "time": "07.10 AM",
+        "order": 2
+      },
+      {
+        "name": "BALLABHGARH PETROL PUMP, BUS TERMINAL",
+        "time": "07.15 AM",
+        "order": 3
+      },
+      {
+        "name": "BALLABHGARH METRO STATION,",
+        "time": "07.20 AM",
+        "order": 4
+      },
+      {
+        "name": "SIHI METRO STATION, FBD.",
+        "time": "07.22 AM",
+        "order": 5
+      },
+      {
+        "name": "ESCORT MUJESER METRO STATION",
+        "time": "07.25 AM",
+        "order": 6
+      },
+      {
+        "name": "BATA METRO STATION, FARIDABAD",
+        "time": "07.27 AM",
+        "order": 7
+      },
+      {
+        "name": "NEELAM METRO STATION, FARIDABAD",
+        "time": "07.30 AM",
+        "order": 8
+      },
+      {
+        "name": "OLD FLYOVER, SECTOR 16, FARIDABAD",
+        "time": "07.32 AM",
+        "order": 9
+      },
+      {
+        "name": "BADKAL METRO STATION, FARIDABAD",
+        "time": "07.35 AM",
+        "order": 10
+      },
+      {
+        "name": "ASIAN HOSPITAL, FARIDABAD",
+        "time": "07.40 AM",
+        "order": 11
+      },
+      {
+        "name": "SECTOR 21C, BLOCK, FARIDABAD",
+        "time": "07.45 AM",
+        "order": 12
+      },
+      {
+        "name": "SECTOR 48, FARIDABAD",
+        "time": "07.50 AM",
+        "order": 13
+      },
+      {
+        "name": "SAINIK COLONY CHOWK, FARIDABAD",
+        "time": "07.55 AM",
+        "order": 14
+      },
+      {
+        "name": "SAINIK COLONY CHOWK, GATE NO. 3, FARIDABAD",
+        "time": "07.57 AM",
+        "order": 15
+      },
+      {
+        "name": "ACHEIVER'S APARTMENT, FARIDABAD",
+        "time": "08.00 AM",
+        "order": 16
+      },
+      {
+        "name": "PALI VILLAGE, FARIDABAD",
+        "time": "08.05 AM",
+        "order": 17
+      },
+      {
+        "name": "G D Goenka Education City",
+        "time": "09.00 AM",
+        "order": 18
+      }
+    ]
+  }
+]

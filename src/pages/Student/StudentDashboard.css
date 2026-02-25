@@ -1,0 +1,121 @@
+.sd-section {
+    padding: var(--space-lg);
+}
+
+.sd-section h3 {
+    font-size: var(--fs-lg);
+    margin-bottom: var(--space-md);
+}
+
+/* Route details */
+.route-details {}
+
+.rd-name {
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: var(--space-sm);
+}
+
+.rd-meta {
+    display: flex;
+    gap: var(--space-md);
+    font-size: var(--fs-sm);
+    color: var(--text-muted);
+    margin-bottom: var(--space-md);
+}
+
+.rd-stops {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    position: relative;
+}
+
+.rd-stop {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-sm);
+    padding: var(--space-sm) 0;
+    position: relative;
+}
+
+.rd-stop:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    top: 28px;
+    left: 6px;
+    width: 2px;
+    height: calc(100% - 16px);
+    background: var(--border-glass);
+}
+
+.rd-stop-dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 3px;
+    box-shadow: 0 0 8px currentColor;
+}
+
+.rd-stop-info {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.rd-stop-name {
+    font-size: var(--fs-sm);
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
+.rd-stop-time {
+    font-size: var(--fs-xs);
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+/* Fee info */
+.fee-info {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.fee-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: var(--fs-sm);
+    color: var(--text-secondary);
+}
+
+.fee-amount {
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+/* Driver info */
+.driver-info-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.dic-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: var(--fs-sm);
+}
+
+.dic-row span:first-child {
+    color: var(--text-muted);
+    font-size: var(--fs-xs);
+    text-transform: uppercase;
+}
+
+.dic-row span:last-child {
+    color: var(--text-primary);
+    font-weight: 500;
+}

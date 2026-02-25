@@ -1,0 +1,175 @@
+/* Faculty Dashboard */
+.fd-section {
+    padding: var(--space-lg);
+}
+
+.fd-section h3 {
+    font-size: var(--fs-lg);
+    margin-bottom: var(--space-md);
+}
+
+/* Visit Route Card */
+
+.fd-visit-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-sm);
+}
+
+.fd-visit-dest {
+    font-size: var(--fs-lg);
+    font-weight: 700;
+}
+
+.fd-visit-meta {
+    display: flex;
+    gap: var(--space-md);
+    font-size: var(--fs-xs);
+    color: var(--text-muted);
+    margin-bottom: var(--space-md);
+    flex-wrap: wrap;
+}
+
+/* Route Timeline */
+.fd-route-timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    padding: var(--space-sm) 0;
+}
+
+.fd-route-stop {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-md);
+    position: relative;
+    padding-bottom: var(--space-sm);
+}
+
+.fd-route-dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 3px;
+    z-index: 1;
+}
+
+.fd-route-dot.start {
+    background: #6c5ce7;
+    border: 2px solid #a29bfe;
+}
+
+.fd-route-dot.mid {
+    background: #fdcb6e;
+    border: 2px solid #ffeaa7;
+}
+
+.fd-route-dot.end {
+    background: #e17055;
+    border: 2px solid #fab1a0;
+}
+
+.fd-route-connector {
+    position: absolute;
+    left: 6px;
+    top: 18px;
+    bottom: 0;
+    width: 2px;
+    background: repeating-linear-gradient(180deg, var(--text-muted) 0, var(--text-muted) 4px, transparent 4px, transparent 8px);
+}
+
+.fd-route-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.fd-route-label {
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 700;
+}
+
+.fd-route-name {
+    font-size: var(--fs-sm);
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+/* Empty state */
+.fd-empty {
+    text-align: center;
+    padding: var(--space-xl);
+}
+
+.fd-empty span {
+    font-size: 2.5rem;
+    display: block;
+    margin-bottom: var(--space-sm);
+}
+
+.fd-empty p {
+    color: var(--text-muted);
+    font-size: var(--fs-sm);
+}
+
+/* Recent Requests */
+.fd-requests-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.fd-req-card {
+    padding: var(--space-md);
+    background: var(--bg-glass, rgba(255, 255, 255, 0.02));
+    border-radius: var(--border-radius-sm, 8px);
+    border-left: 3px solid var(--accent-primary);
+}
+
+.fd-req-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4px;
+}
+
+.fd-req-header h4 {
+    font-size: var(--fs-sm);
+    margin: 0;
+}
+
+.fd-req-meta {
+    display: flex;
+    gap: var(--space-sm);
+    font-size: var(--fs-xs);
+    color: var(--text-muted);
+    margin-bottom: 6px;
+    flex-wrap: wrap;
+}
+
+/* Mini Route */
+.fd-mini-route {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 2px;
+    font-size: var(--fs-xs);
+    color: var(--text-secondary);
+    padding: 6px 8px;
+    background: rgba(108, 92, 231, 0.06);
+    border-radius: 6px;
+}
+
+.fd-mini-stop {
+    white-space: nowrap;
+}
+
+.fd-mini-arrow {
+    color: var(--accent-primary);
+    margin: 0 4px;
+    font-weight: 700;
+}

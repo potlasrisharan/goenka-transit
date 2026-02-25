@@ -1,0 +1,99 @@
+.quick-section {
+    padding: var(--space-lg);
+}
+
+.quick-section h3 {
+    font-size: var(--fs-lg);
+    margin-bottom: var(--space-md);
+    color: var(--text-primary);
+}
+
+/* Fleet list */
+.fleet-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.fleet-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-sm) var(--space-md);
+    background: var(--bg-glass);
+    border-radius: var(--border-radius-sm);
+    transition: background var(--transition-fast);
+}
+
+.fleet-item:hover {
+    background: var(--bg-glass-hover);
+}
+
+.fleet-bus-info {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+}
+
+.fleet-bus-number {
+    font-weight: 700;
+    font-size: var(--fs-sm);
+    color: var(--accent-primary);
+    background: rgba(108, 92, 231, 0.1);
+    padding: 2px 10px;
+    border-radius: 6px;
+}
+
+.fleet-bus-name {
+    font-size: var(--fs-sm);
+    color: var(--text-secondary);
+}
+
+.fleet-meta {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+}
+
+.fleet-driver {
+    font-size: var(--fs-xs);
+    color: var(--text-muted);
+}
+
+/* Complaint preview */
+.recent-complaints {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.complaint-preview {
+    padding: var(--space-sm) var(--space-md);
+    background: var(--bg-glass);
+    border-radius: var(--border-radius-sm);
+    border-left: 3px solid var(--accent-warning);
+}
+
+.complaint-preview-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4px;
+}
+
+.complaint-student {
+    font-size: var(--fs-sm);
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.complaint-subject {
+    font-size: var(--fs-sm);
+    color: var(--text-secondary);
+    margin-bottom: 4px;
+}
+
+.complaint-date {
+    font-size: var(--fs-xs);
+    color: var(--text-muted);
+}
