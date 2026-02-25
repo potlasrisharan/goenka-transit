@@ -57,11 +57,28 @@ export function TransportProvider({ children }) {
                     used = true;
                 }
                 if (!bRes.error && bRes.data.length > 0) {
-                    setBuses(bRes.data.map(b => ({
+                    const fetchedBuses = bRes.data.map(b => ({
                         id: b.id, number: b.number || b.id, name: b.name || b.id,
                         capacity: b.total_seats || b.capacity || 40, routeId: b.route_id, driverId: b.driver_id,
                         status: b.status || 'active', totalSeats: b.total_seats || 40,
-                    })));
+                    }));
+                    setBuses(fetchedBuses);
+
+                    // Initialize realistic bus positions near GD Goenka Education City (Gurugram/Sohna)
+                    // GDGU Approx: Lat 28.257, Lng 77.050
+                    const initialPositions = {};
+                    fetchedBuses.forEach((b, i) => {
+                        const offsetLat = (Math.random() - 0.5) * 0.15; // Spread them out around Delhi/NCR
+                        const offsetLng = (Math.random() - 0.5) * 0.15;
+                        initialPositions[b.id] = {
+                            lat: 28.257 + offsetLat,
+                            lng: 77.050 + offsetLng,
+                            heading: Math.floor(Math.random() * 360),
+                            speed: b.status === 'active' ? 20 + Math.floor(Math.random() * 30) : 0
+                        };
+                    });
+                    setBusPositions(initialPositions);
+
                     used = true;
                 }
                 if (!dRes.error && dRes.data.length > 0) {

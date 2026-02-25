@@ -40,7 +40,7 @@ export default function BusTracking() {
     const selectedRoute = selectedBus ? routes.find(r => r.id === selectedBus.routeId) : null;
     const center = selectedBus && busPositions[selectedBus.id]
         ? [busPositions[selectedBus.id].lat, busPositions[selectedBus.id].lng]
-        : [17.4435, 78.3772];
+        : [28.257, 77.050];
 
     return (
         <div className="page-container">
