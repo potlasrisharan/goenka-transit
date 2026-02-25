@@ -109,26 +109,38 @@ export default function StudentDashboard() {
                 {/* Fee Info */}
                 <motion.div className="glass-panel sd-section" variants={item} initial="hidden" animate="show" transition={{ delay: 0.15 }}>
                     <h3>💰 Semester Fee</h3>
-                    <div className="fee-info">
-                        <div className="fee-row">
-                            <span>Semester Fee</span>
-                            <span className="fee-amount">₹{feeStructure.semesterFee.toLocaleString()}</span>
-                        </div>
-                        <div className="fee-row">
-                            <span>Late Fee</span>
-                            <span className="fee-amount">₹{feeStructure.lateFee}</span>
-                        </div>
-                        <div className="fee-row">
-                            <span>Due Date</span>
-                            <span className="fee-amount">{feeStructure.dueDate}</span>
-                        </div>
-                        <div className="fee-row" style={{ borderTop: '1px solid var(--border-glass)', paddingTop: 'var(--space-sm)', marginTop: 'var(--space-sm)' }}>
-                            <span style={{ fontWeight: 700 }}>Status</span>
-                            <span className={`badge ${user.feePaid ? 'badge-success' : 'badge-danger'}`}>
-                                {user.feePaid ? '✅ Paid' : '❌ Payment Due'}
-                            </span>
-                        </div>
-                    </div>
+                    {(() => {
+                        let dynamicFee = feeStructure.semesterFee;
+                        if (route && route.city) {
+                            const city = route.city.toLowerCase();
+                            if (city.includes('delhi')) dynamicFee = 40000;
+                            else if (city.includes('gurugram') || city.includes('gurgaon')) dynamicFee = 33000;
+                            else if (city.includes('faridabad')) dynamicFee = 46000;
+                        }
+
+                        return (
+                            <div className="fee-info">
+                                <div className="fee-row">
+                                    <span>Semester Fee ({route?.city || 'Default'})</span>
+                                    <span className="fee-amount">₹{dynamicFee.toLocaleString()}</span>
+                                </div>
+                                <div className="fee-row">
+                                    <span>Late Fee</span>
+                                    <span className="fee-amount">₹{feeStructure.lateFee}</span>
+                                </div>
+                                <div className="fee-row">
+                                    <span>Due Date</span>
+                                    <span className="fee-amount">{feeStructure.dueDate}</span>
+                                </div>
+                                <div className="fee-row" style={{ borderTop: '1px solid var(--border-glass)', paddingTop: 'var(--space-sm)', marginTop: 'var(--space-sm)' }}>
+                                    <span style={{ fontWeight: 700 }}>Status</span>
+                                    <span className={`badge ${user.feePaid ? 'badge-success' : 'badge-danger'}`}>
+                                        {user.feePaid ? '✅ Paid' : '❌ Payment Due'}
+                                    </span>
+                                </div>
+                            </div>
+                        );
+                    })()}
                 </motion.div>
 
                 {/* Driver Info */}
