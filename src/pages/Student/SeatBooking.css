@@ -151,3 +151,20 @@
         text-align: center;
     }
 }
+
+@media (max-width: 480px) {
+
+    .sb-controls,
+    .sb-map-area {
+        padding: var(--space-md);
+    }
+
+    .sb-confirm-info {
+        flex-direction: column;
+        gap: var(--space-xs);
+    }
+
+    .sb-confirm-btn {
+        width: 100%;
+    }
+}

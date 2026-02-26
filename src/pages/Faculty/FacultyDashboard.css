@@ -173,3 +173,23 @@
     margin: 0 4px;
     font-weight: 700;
 }
+
+@media (max-width: 768px) {
+    .fd-section {
+        padding: var(--space-md);
+    }
+
+    .fd-visit-header {
+        flex-direction: column;
+        gap: var(--space-xs);
+    }
+
+    .fd-req-header {
+        flex-direction: column;
+        gap: var(--space-xs);
+    }
+
+    .fd-visit-meta {
+        font-size: 0.65rem;
+    }
+}

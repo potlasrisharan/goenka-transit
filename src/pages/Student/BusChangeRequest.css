@@ -179,3 +179,24 @@
     color: var(--accent);
     margin-top: 0.5rem;
 }
+
+@media (max-width: 768px) {
+    .current-bus-info {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+
+    .history-header {
+        flex-direction: column;
+        gap: 0.3rem;
+    }
+
+    .change-form {
+        padding: 1rem;
+    }
+
+    .btn-submit {
+        min-height: 48px;
+    }
+}

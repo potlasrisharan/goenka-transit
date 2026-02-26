@@ -139,3 +139,17 @@
         gap: var(--space-md);
     }
 }
+
+@media (max-width: 480px) {
+    .bus-list-item {
+        padding: var(--space-sm);
+    }
+
+    .route-info-bar {
+        padding: var(--space-sm) var(--space-md);
+    }
+
+    .route-info-item {
+        flex: 1 1 45%;
+    }
+}

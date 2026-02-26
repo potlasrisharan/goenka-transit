@@ -263,3 +263,27 @@
     color: var(--accent-success);
     font-weight: 600;
 }
+
+@media (max-width: 768px) {
+    .iv-section {
+        padding: var(--space-md);
+    }
+
+    .iv-card-header {
+        flex-direction: column;
+        gap: var(--space-xs);
+    }
+
+    .iv-stop-input-row {
+        flex-direction: column;
+    }
+
+    .iv-add-stop-btn {
+        width: 100%;
+        min-height: 44px;
+    }
+
+    .iv-card-meta {
+        font-size: 0.65rem;
+    }
+}

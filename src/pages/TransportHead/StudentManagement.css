@@ -201,3 +201,36 @@
         grid-template-columns: 1fr;
     }
 }
+
+@media (max-width: 768px) {
+    .sm-layout {
+        grid-template-columns: 1fr;
+        gap: var(--space-md);
+    }
+
+    .sm-seat-panel,
+    .sm-detail-panel,
+    .sm-student-panel {
+        padding: var(--space-md);
+    }
+
+    .sm-bus-selector {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .sm-bus-selector .form-select {
+        max-width: 100%;
+        width: 100%;
+    }
+
+    .seat-legend {
+        flex-wrap: wrap;
+        gap: var(--space-sm);
+    }
+
+    .detail-row {
+        flex-direction: column;
+        gap: 2px;
+    }
+}

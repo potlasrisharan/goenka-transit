@@ -146,6 +146,18 @@
 }
 
 @media (max-width: 768px) {
+    .navbar {
+        padding: 0 var(--space-md);
+    }
+
+    .navbar-toggle {
+        min-width: 44px;
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
     .navbar-status {
         display: none;
     }
@@ -156,5 +168,9 @@
 
     .brand-sub {
         display: none;
+    }
+
+    .navbar-right {
+        gap: var(--space-sm);
     }
 }

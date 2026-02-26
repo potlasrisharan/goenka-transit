@@ -201,3 +201,36 @@
         grid-template-columns: 1fr;
     }
 }
+
+@media (max-width: 768px) {
+    .dd-card {
+        padding: var(--space-md);
+    }
+
+    .dd-modal {
+        width: 95%;
+        padding: var(--space-md);
+    }
+
+    .dd-edit-actions {
+        flex-direction: column;
+    }
+
+    .dd-save-btn,
+    .dd-cancel-btn {
+        width: 100%;
+        min-height: 44px;
+        text-align: center;
+    }
+
+    .dd-toast {
+        left: var(--space-md);
+        right: var(--space-md);
+        bottom: var(--space-md);
+        text-align: center;
+    }
+
+    .dd-header {
+        flex-wrap: wrap;
+    }
+}

@@ -97,3 +97,26 @@
     font-size: var(--fs-xs);
     color: var(--text-muted);
 }
+
+@media (max-width: 768px) {
+    .quick-section {
+        padding: var(--space-md);
+    }
+
+    .fleet-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--space-xs);
+    }
+
+    .fleet-meta {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .complaint-preview-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--space-xs);
+    }
+}

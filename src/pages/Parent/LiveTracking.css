@@ -128,3 +128,23 @@
         height: 350px !important;
     }
 }
+
+@media (max-width: 480px) {
+    .parent-tracking-page {
+        padding: var(--space-md);
+    }
+
+    .pt-header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .pt-info-bar {
+        flex-direction: column;
+        gap: var(--space-sm);
+    }
+
+    .pt-map .map-container {
+        height: 280px !important;
+    }
+}

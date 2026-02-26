@@ -8,7 +8,10 @@
 }
 
 /* Route details */
-.route-details {}
+.route-details {
+    display: flex;
+    flex-direction: column;
+}
 
 .rd-name {
     font-weight: 600;
@@ -118,4 +121,24 @@
 .dic-row span:last-child {
     color: var(--text-primary);
     font-weight: 500;
+}
+
+@media (max-width: 768px) {
+    .sd-section {
+        padding: var(--space-md);
+    }
+
+    .rd-meta {
+        flex-direction: column;
+        gap: var(--space-xs);
+    }
+
+    .fee-row {
+        font-size: var(--fs-xs);
+    }
+
+    .dic-row {
+        flex-direction: column;
+        gap: 2px;
+    }
 }

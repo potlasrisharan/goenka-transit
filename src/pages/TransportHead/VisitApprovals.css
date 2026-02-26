@@ -281,3 +281,45 @@
     margin-top: 0.5rem;
     text-align: right;
 }
+
+@media (max-width: 768px) {
+    .visit-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+
+    .action-btns {
+        flex-direction: column;
+    }
+
+    .btn-approve,
+    .btn-reject {
+        width: 100%;
+        min-height: 44px;
+        text-align: center;
+    }
+
+    .assign-row {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .assign-row select {
+        width: 100%;
+    }
+
+    .temp-route-stops {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+
+    .route-line {
+        display: none;
+    }
+
+    .visit-date-meta {
+        text-align: left;
+    }
+}

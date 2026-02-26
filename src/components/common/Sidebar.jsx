@@ -27,75 +27,102 @@ const menuItems = {
     ],
 };
 
-export default function Sidebar({ isOpen }) {
+export default function Sidebar({ isOpen, onClose }) {
     const { user } = useAuth();
     const location = useLocation();
+    const isMobile = window.innerWidth <= 768;
 
     if (!user) return null;
     const items = menuItems[user.role] || [];
 
+    const handleNavClick = () => {
+        if (window.innerWidth <= 768 && onClose) {
+            onClose();
+        }
+    };
+
+    // On mobile, animate sidebar in/out via Framer Motion x
+    // On desktop, always keep x at 0 and let CSS width handle collapse
+    const sidebarVariants = {
+        open: { x: 0 },
+        closed: isMobile ? { x: -280 } : { x: 0 },
+    };
+
     return (
-        <motion.aside
-            className={`sidebar ${isOpen ? 'sidebar-open' : 'sidebar-closed'}`}
-            initial={{ x: -280 }}
-            animate={{ x: 0 }}
-            transition={{ type: 'spring', stiffness: 120, damping: 22 }}
-        >
-            <div className="sidebar-header">
-                <div className="sidebar-role-badge">
-                    <span className="role-icon">{user.avatar}</span>
-                    {isOpen && (
-                        <motion.div
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            className="role-details"
-                        >
-                            <span className="role-label">{user.role.replace('_', ' ')}</span>
-                            <span className="role-id">{user.id}</span>
-                        </motion.div>
-                    )}
-                </div>
-            </div>
+        <>
+            {/* Mobile backdrop overlay */}
+            {isOpen && isMobile && (
+                <div
+                    className="sidebar-overlay"
+                    onClick={onClose}
+                    aria-hidden="true"
+                />
+            )}
 
-            <nav className="sidebar-nav">
-                <AnimatePresence>
-                    {items.map((item, index) => (
-                        <motion.div
-                            key={item.path}
-                            initial={{ opacity: 0, x: -20 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            transition={{ delay: index * 0.05 }}
-                        >
-                            <NavLink
-                                to={item.path}
-                                className={({ isActive }) =>
-                                    `sidebar-link ${isActive ? 'sidebar-link-active' : ''}`
-                                }
-                                id={`nav-${item.label.toLowerCase().replace(/[^a-z]/g, '-')}`}
+            <motion.aside
+                className={`sidebar ${isOpen ? 'sidebar-open' : 'sidebar-closed'}`}
+                variants={sidebarVariants}
+                initial={isMobile ? 'closed' : 'open'}
+                animate={isOpen ? 'open' : 'closed'}
+                transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+            >
+                <div className="sidebar-header">
+                    <div className="sidebar-role-badge">
+                        <span className="role-icon">{user.avatar}</span>
+                        {isOpen && (
+                            <motion.div
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                className="role-details"
                             >
-                                <span className="sidebar-link-icon">{item.icon}</span>
-                                {isOpen && <span className="sidebar-link-label">{item.label}</span>}
-                                {location.pathname === item.path && (
-                                    <motion.div
-                                        className="sidebar-active-indicator"
-                                        layoutId="activeTab"
-                                        transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-                                    />
-                                )}
-                            </NavLink>
-                        </motion.div>
-                    ))}
-                </AnimatePresence>
-            </nav>
-
-            {isOpen && (
-                <div className="sidebar-footer">
-                    <div className="sidebar-footer-text">
-                        <span>Goenka Transit v1.0</span>
-                        <span>© 2026 Binary Brains</span>
+                                <span className="role-label">{user.role.replace('_', ' ')}</span>
+                                <span className="role-id">{user.id}</span>
+                            </motion.div>
+                        )}
                     </div>
                 </div>
-            )}
-        </motion.aside>
+
+                <nav className="sidebar-nav">
+                    <AnimatePresence>
+                        {items.map((item, index) => (
+                            <motion.div
+                                key={item.path}
+                                initial={{ opacity: 0, x: -20 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ delay: index * 0.05 }}
+                            >
+                                <NavLink
+                                    to={item.path}
+                                    className={({ isActive }) =>
+                                        `sidebar-link ${isActive ? 'sidebar-link-active' : ''}`
+                                    }
+                                    id={`nav-${item.label.toLowerCase().replace(/[^a-z]/g, '-')}`}
+                                    onClick={handleNavClick}
+                                >
+                                    <span className="sidebar-link-icon">{item.icon}</span>
+                                    {isOpen && <span className="sidebar-link-label">{item.label}</span>}
+                                    {location.pathname === item.path && (
+                                        <motion.div
+                                            className="sidebar-active-indicator"
+                                            layoutId="activeTab"
+                                            transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+                                        />
+                                    )}
+                                </NavLink>
+                            </motion.div>
+                        ))}
+                    </AnimatePresence>
+                </nav>
+
+                {isOpen && (
+                    <div className="sidebar-footer">
+                        <div className="sidebar-footer-text">
+                            <span>Goenka Transit v1.0</span>
+                            <span>© 2026 Binary Brains</span>
+                        </div>
+                    </div>
+                )}
+            </motion.aside>
+        </>
     );
 }

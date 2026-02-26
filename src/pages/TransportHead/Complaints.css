@@ -140,3 +140,36 @@
     background: var(--bg-glass);
     color: var(--text-secondary);
 }
+
+@media (max-width: 768px) {
+    .cc-header {
+        flex-direction: column;
+        gap: var(--space-sm);
+    }
+
+    .complaints-filters {
+        gap: var(--space-xs);
+    }
+
+    .filter-btn {
+        padding: 10px 14px;
+        font-size: var(--fs-xs);
+    }
+
+    .complaint-card {
+        padding: var(--space-md);
+    }
+
+    .cc-footer {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-sm);
+    }
+
+    .cc-btn {
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
