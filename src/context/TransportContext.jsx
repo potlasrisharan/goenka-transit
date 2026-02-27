@@ -239,6 +239,78 @@ export function TransportProvider({ children }) {
         }
         fetchAll();
 
+        // ── FALLBACK POLLING MECHANISM ──
+        // Since Supabase Realtime is dropping WebSockets / refusing to broadcast INSERTS
+        // for these table configurations, we will force a silent background fetch every 5 seconds.
+        const pollInterval = setInterval(async () => {
+            if (!isSupabaseConfigured()) return;
+            try {
+                // Fetch the latest additions without triggering full re-renders of the whole app unless data actually changed
+                const [cRes, ivRes, bcrRes] = await Promise.all([
+                    supabase.from('complaints').select('*').order('created_at', { ascending: false }).limit(20),
+                    supabase.from('industrial_visits').select('*').order('created_at', { ascending: false }).limit(20),
+                    supabase.from('bus_change_requests').select('*').order('created_at', { ascending: false }).limit(20)
+                ]);
+
+                if (!cRes.error && cRes.data) {
+                    setComplaints(prev => {
+                        const newItems = cRes.data.filter(inbound => !prev.find(p => p.id === inbound.id));
+                        if (newItems.length === 0) return prev;
+                        // Format and prepend new items just like the main fetch
+                        const formatted = newItems.map(c => ({
+                            id: c.id, studentId: c.student_id, studentName: c.student_name || '—',
+                            busId: c.bus_id, category: c.category || 'Other',
+                            subject: c.subject || c.message?.substring(0, 50) || '—',
+                            description: c.message || '—', status: c.status || 'pending',
+                            date: c.created_at?.split('T')[0] || new Date().toISOString().split('T')[0],
+                            response: c.response,
+                        }));
+                        const merged = [...formatted, ...prev];
+                        lsSet(LS_COMPLAINTS, merged);
+                        return merged;
+                    });
+                }
+
+                if (!ivRes.error && ivRes.data) {
+                    setVisits(prev => {
+                        const newItems = ivRes.data.filter(inbound => !prev.find(p => p.id === inbound.id));
+                        if (newItems.length === 0) return prev;
+                        const formatted = newItems.map(v => ({
+                            id: v.id, facultyId: v.faculty_id, facultyName: v.faculty_name,
+                            destination: v.destination, date: v.visit_date, students: v.num_students,
+                            purpose: v.purpose, status: v.status, busAssigned: v.bus_assigned,
+                            createdAt: v.created_at?.split('T')[0],
+                            stops: v.purpose?.includes('[STOPS]') ? JSON.parse(v.purpose.split('[STOPS]')[1] || '[]') : [],
+                        }));
+                        const merged = [...formatted, ...prev];
+                        lsSet(LS_VISITS, merged);
+                        return merged;
+                    });
+                }
+
+                if (!bcrRes.error && bcrRes.data) {
+                    setBusChangeRequests(prev => {
+                        const newItems = bcrRes.data.filter(inbound => !prev.find(p => p.id === inbound.id));
+                        if (newItems.length === 0) return prev;
+                        const formatted = newItems.map(r => ({
+                            ...r,
+                            studentId: r.student_id || r.studentId,
+                            studentName: r.student_name || r.studentName,
+                            busId: r.current_bus_id || r.busId,
+                            requestedBusId: r.requested_bus_id || r.requestedBusId,
+                            reason: r.reason, status: r.status || 'pending',
+                            date: r.created_at?.split('T')[0] || r.date,
+                        }));
+                        const merged = [...formatted, ...prev];
+                        lsSet(LS_BUS_CHANGES, merged);
+                        return merged;
+                    });
+                }
+            } catch (err) {
+                // Ignore silent polling errors so we don't spam the console
+            }
+        }, 5000); // 5 seconds
+
         if (!isSupabaseConfigured()) return;
 
         // ── Realtime Subscriptions ──
@@ -375,6 +447,7 @@ export function TransportProvider({ children }) {
             .subscribe();
 
         return () => {
+            clearInterval(pollInterval);
             supabase.removeChannel(channel);
         };
     }, []);
