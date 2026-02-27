@@ -22,6 +22,8 @@ const LS_BUS_CHANGES = 'gt_bus_changes';
 
 const lsGet = (key, fallback) => { try { const v = localStorage.getItem(key); return v ? JSON.parse(v) : fallback; } catch { return fallback; } };
 const lsSet = (key, val) => { try { localStorage.setItem(key, JSON.stringify(val)); } catch { } };
+const genId = () => typeof crypto !== 'undefined' && crypto.randomUUID ? crypto.randomUUID() : 'id-' + Date.now() + '-' + Math.random().toString(36).substring(2, 9);
+
 
 export function TransportProvider({ children }) {
     const [buses, setBuses] = useState(mockBuses);
@@ -229,44 +231,95 @@ export function TransportProvider({ children }) {
             .on('postgres_changes', { event: '*', schema: 'public', table: 'complaints' }, (payload) => {
                 console.log('Realtime Update [complaints]:', payload);
                 if (payload.eventType === 'INSERT') {
-                    setComplaints(p => [{
-                        id: payload.new.id, studentId: payload.new.student_id, studentName: payload.new.student_name || '—',
-                        busId: payload.new.bus_id, category: payload.new.category || 'Other',
-                        subject: payload.new.subject || payload.new.message?.substring(0, 50) || '—',
-                        description: payload.new.message || '—', status: payload.new.status || 'pending',
-                        date: payload.new.created_at?.split('T')[0] || new Date().toISOString().split('T')[0],
-                        response: payload.new.response,
-                    }, ...p]);
+                    setComplaints(p => {
+                        if (p.find(c => c.id === payload.new.id)) return p;
+                        const newC = {
+                            id: payload.new.id, studentId: payload.new.student_id, studentName: payload.new.student_name || '—',
+                            busId: payload.new.bus_id, category: payload.new.category || 'Other',
+                            subject: payload.new.subject || payload.new.message?.substring(0, 50) || '—',
+                            description: payload.new.message || '—', status: payload.new.status || 'pending',
+                            date: payload.new.created_at?.split('T')[0] || new Date().toISOString().split('T')[0],
+                            response: payload.new.response,
+                        };
+                        const updated = [newC, ...p];
+                        lsSet(LS_COMPLAINTS, updated);
+                        return updated;
+                    });
                 } else if (payload.eventType === 'UPDATE') {
-                    setComplaints(p => p.map(c => c.id === payload.new.id ? { ...c, status: payload.new.status, response: payload.new.response } : c));
+                    setComplaints(p => {
+                        const updated = p.map(c => c.id === payload.new.id ? { ...c, status: payload.new.status, response: payload.new.response } : c);
+                        lsSet(LS_COMPLAINTS, updated);
+                        return updated;
+                    });
                 } else if (payload.eventType === 'DELETE') {
-                    setComplaints(p => p.filter(c => c.id !== payload.old.id));
+                    setComplaints(p => {
+                        const updated = p.filter(c => c.id !== payload.old.id);
+                        lsSet(LS_COMPLAINTS, updated);
+                        return updated;
+                    });
                 }
             })
             .on('postgres_changes', { event: '*', schema: 'public', table: 'industrial_visits' }, (payload) => {
                 console.log('Realtime Update [industrial_visits]:', payload);
                 if (payload.eventType === 'INSERT') {
-                    setVisits(p => [{
-                        id: payload.new.id, facultyId: payload.new.faculty_id, facultyName: payload.new.faculty_name,
-                        destination: payload.new.destination, date: payload.new.visit_date, students: payload.new.num_students,
-                        purpose: payload.new.purpose, status: payload.new.status, busAssigned: payload.new.bus_assigned,
-                        createdAt: payload.new.created_at?.split('T')[0],
-                        stops: payload.new.purpose?.includes('[STOPS]') ? JSON.parse(payload.new.purpose.split('[STOPS]')[1] || '[]') : [],
-                    }, ...p]);
+                    setVisits(p => {
+                        if (p.find(v => v.id === payload.new.id)) return p;
+                        const newV = {
+                            id: payload.new.id, facultyId: payload.new.faculty_id, facultyName: payload.new.faculty_name,
+                            destination: payload.new.destination, date: payload.new.visit_date, students: payload.new.num_students,
+                            purpose: payload.new.purpose, status: payload.new.status, busAssigned: payload.new.bus_assigned,
+                            createdAt: payload.new.created_at?.split('T')[0],
+                            stops: payload.new.purpose?.includes('[STOPS]') ? JSON.parse(payload.new.purpose.split('[STOPS]')[1] || '[]') : [],
+                        };
+                        const updated = [newV, ...p];
+                        lsSet(LS_VISITS, updated);
+                        return updated;
+                    });
                 } else if (payload.eventType === 'UPDATE') {
-                    setVisits(p => p.map(v => v.id === payload.new.id ? { ...v, status: payload.new.status, busAssigned: payload.new.bus_assigned } : v));
+                    setVisits(p => {
+                        const updated = p.map(v => v.id === payload.new.id ? { ...v, status: payload.new.status, busAssigned: payload.new.bus_assigned } : v);
+                        lsSet(LS_VISITS, updated);
+                        return updated;
+                    });
                 } else if (payload.eventType === 'DELETE') {
-                    setVisits(p => p.filter(v => v.id !== payload.old.id));
+                    setVisits(p => {
+                        const updated = p.filter(v => v.id !== payload.old.id);
+                        lsSet(LS_VISITS, updated);
+                        return updated;
+                    });
                 }
             })
             .on('postgres_changes', { event: '*', schema: 'public', table: 'bus_change_requests' }, (payload) => {
                 console.log('Realtime Update [bus_change_requests]:', payload);
                 if (payload.eventType === 'INSERT') {
-                    setBusChangeRequests(p => [payload.new, ...p]);
+                    setBusChangeRequests(p => {
+                        if (p.find(r => r.id === payload.new.id)) return p;
+                        const newR = {
+                            ...payload.new,
+                            studentId: payload.new.student_id,
+                            studentName: payload.new.student_name,
+                            busId: payload.new.current_bus_id,
+                            requestedBusId: payload.new.requested_bus_id,
+                            reason: payload.new.reason,
+                            status: payload.new.status || 'pending',
+                            date: payload.new.created_at?.split('T')[0],
+                        };
+                        const updated = [newR, ...p];
+                        lsSet(LS_BUS_CHANGES, updated);
+                        return updated;
+                    });
                 } else if (payload.eventType === 'UPDATE') {
-                    setBusChangeRequests(p => p.map(r => r.id === payload.new.id ? payload.new : r));
+                    setBusChangeRequests(p => {
+                        const updated = p.map(r => r.id === payload.new.id ? { ...r, status: payload.new.status, admin_note: payload.new.admin_note } : r);
+                        lsSet(LS_BUS_CHANGES, updated);
+                        return updated;
+                    });
                 } else if (payload.eventType === 'DELETE') {
-                    setBusChangeRequests(p => p.filter(r => r.id !== payload.old.id));
+                    setBusChangeRequests(p => {
+                        const updated = p.filter(r => r.id !== payload.old.id);
+                        lsSet(LS_BUS_CHANGES, updated);
+                        return updated;
+                    });
                 }
             })
             .on('postgres_changes', { event: '*', schema: 'public', table: 'drivers' }, (payload) => {
@@ -375,7 +428,8 @@ export function TransportProvider({ children }) {
     }, [getStudentBooking]);
 
     const addComplaint = useCallback(async (c) => {
-        const newC = { ...c, id: `CMP${Date.now()}`, status: 'pending', date: new Date().toISOString().split('T')[0], response: null };
+        const newId = genId();
+        const newC = { ...c, id: newId, status: 'pending', date: new Date().toISOString().split('T')[0], response: null };
         setComplaints(p => {
             const updated = [newC, ...p];
             lsSet(LS_COMPLAINTS, updated);
@@ -383,7 +437,7 @@ export function TransportProvider({ children }) {
             return updated;
         });
         if (isSupabaseConfigured()) {
-            await supabase.from('complaints').insert({ student_id: c.studentId, student_name: c.studentName, bus_id: c.busId, category: c.category, subject: c.subject, message: c.description, status: 'pending' });
+            await supabase.from('complaints').insert({ id: newId, student_id: c.studentId, student_name: c.studentName, bus_id: c.busId, category: c.category, subject: c.subject, message: c.description, status: 'pending' });
         }
     }, []);
 
@@ -404,8 +458,8 @@ export function TransportProvider({ children }) {
 
     // ── Bus Change Requests ──
     const submitBusChangeRequest = useCallback(async (req) => {
-        const tempId = `BCR_${Date.now()}_${Math.random().toString(36).slice(2, 7)}`;
-        const newReq = { ...req, id: tempId, status: 'pending', created_at: new Date().toISOString() };
+        const newId = genId();
+        const newReq = { ...req, id: newId, status: 'pending', created_at: new Date().toISOString() };
         setBusChangeRequests(p => {
             const updated = [newReq, ...p];
             lsSet(LS_BUS_CHANGES, updated);
@@ -413,11 +467,10 @@ export function TransportProvider({ children }) {
             return updated;
         });
         if (isSupabaseConfigured()) {
-            const { data } = await supabase.from('bus_change_requests').insert({
-                student_id: req.student_id, student_name: req.student_name,
+            await supabase.from('bus_change_requests').insert({
+                id: newId, student_id: req.student_id, student_name: req.student_name,
                 current_bus_id: req.current_bus_id, requested_bus_id: req.requested_bus_id, reason: req.reason,
-            }).select();
-            if (data?.[0]) setBusChangeRequests(p => p.map(r => r.id === tempId ? { ...data[0] } : r));
+            });
         }
     }, []);
 
@@ -456,7 +509,8 @@ export function TransportProvider({ children }) {
 
     // ── Industrial Visits ──
     const addVisitRequest = useCallback(async (v) => {
-        const newV = { ...v, id: `IV${Date.now()}`, status: 'pending', busAssigned: null, createdAt: new Date().toISOString().split('T')[0], stops: v.stops || [] };
+        const newId = genId();
+        const newV = { ...v, id: newId, status: 'pending', busAssigned: null, createdAt: new Date().toISOString().split('T')[0], stops: v.stops || [] };
         setVisits(p => {
             const updated = [newV, ...p];
             lsSet(LS_VISITS, updated);
@@ -465,7 +519,7 @@ export function TransportProvider({ children }) {
         });
         if (isSupabaseConfigured()) {
             await supabase.from('industrial_visits').insert({
-                faculty_id: v.facultyId, faculty_name: v.facultyName, destination: v.destination,
+                id: newId, faculty_id: v.facultyId, faculty_name: v.facultyName, destination: v.destination,
                 visit_date: v.date, num_students: v.students,
                 purpose: v.purpose + (v.stops?.length ? `\n[STOPS]${JSON.stringify(v.stops)}` : ''),
             });
