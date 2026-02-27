@@ -129,6 +129,29 @@
     font-size: var(--fs-sm) !important;
 }
 
+/* Leaflet zoom controls dark theme */
+.leaflet-control-zoom {
+    border: 1px solid var(--border-glass) !important;
+    border-radius: var(--border-radius-md) !important;
+    overflow: hidden;
+}
+
+.leaflet-control-zoom a {
+    background: var(--bg-secondary) !important;
+    color: var(--text-primary) !important;
+    border-color: var(--border-glass) !important;
+    width: 36px !important;
+    height: 36px !important;
+    line-height: 36px !important;
+    font-size: 18px !important;
+    transition: background var(--transition-fast) !important;
+}
+
+.leaflet-control-zoom a:hover {
+    background: var(--bg-glass-hover) !important;
+    color: var(--accent-primary) !important;
+}
+
 @media (max-width: 768px) {
     .tracking-layout {
         grid-template-columns: 1fr;

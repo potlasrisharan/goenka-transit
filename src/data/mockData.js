@@ -2,23 +2,23 @@
 
 // Users
 export const users = [
-    { id: 'TH001', name: 'Dr. Rajesh Kumar', email: 'transport@goenka.edu', password: 'admin123', role: 'transport_head', phone: '+91 98765 43210', avatar: '🧑‍💼' },
-    { id: 'STU001', name: 'Arjun Sharma', email: 'arjun@student.goenka.edu', password: 'student123', role: 'student', phone: '+91 90000 11111', avatar: '🧑‍🎓', busId: 'BUS01', seatNumber: 'A3', routeId: 'R1', feePaid: true, semester: 'Spring 2026' },
+    { id: 'TH001', name: 'Dr. Rajesh Kumar', email: 'transport@gdgu.org', password: 'admin123', role: 'transport_head', phone: '+91 98765 43210', avatar: '🧑‍💼' },
+    { id: 'STU001', name: 'Arjun Sharma', email: 'student@gdgu.org', password: 'student123', role: 'student', phone: '+91 90000 11111', avatar: '🧑‍🎓', busId: 'BUS01', seatNumber: 'A3', routeId: 'R1', feePaid: true, semester: 'Spring 2026' },
     { id: 'STU002', name: 'Priya Patel', email: 'priya@student.goenka.edu', password: 'student123', role: 'student', phone: '+91 90000 22222', avatar: '👩‍🎓', busId: 'BUS01', seatNumber: 'B2', routeId: 'R1', feePaid: false, semester: 'Spring 2026' },
     { id: 'STU003', name: 'Rahul Verma', email: 'rahul@student.goenka.edu', password: 'student123', role: 'student', phone: '+91 90000 33333', avatar: '🧑‍🎓', busId: 'BUS02', seatNumber: 'A1', routeId: 'R2', feePaid: true, semester: 'Spring 2026' },
     { id: 'STU004', name: 'Sneha Gupta', email: 'sneha@student.goenka.edu', password: 'student123', role: 'student', phone: '+91 90000 44444', avatar: '👩‍🎓', busId: 'BUS02', seatNumber: null, routeId: 'R2', feePaid: true, semester: 'Spring 2026' },
     { id: 'STU005', name: 'Vikram Singh', email: 'vikram@student.goenka.edu', password: 'student123', role: 'student', phone: '+91 90000 55555', avatar: '🧑‍🎓', busId: 'BUS03', seatNumber: 'C4', routeId: 'R3', feePaid: false, semester: 'Spring 2026' },
-    { id: 'FAC001', name: 'Prof. Meera Joshi', email: 'meera@faculty.goenka.edu', password: 'faculty123', role: 'faculty', phone: '+91 91111 11111', avatar: '👩‍🏫', busId: 'BUS01', routeId: 'R1', feePaid: true },
+    { id: 'FAC001', name: 'Prof. Meera Joshi', email: 'faculty@gdgu.org', password: 'faculty123', role: 'faculty', phone: '+91 91111 11111', avatar: '👩‍🏫', busId: 'BUS01', routeId: 'R1', feePaid: true },
     { id: 'FAC002', name: 'Dr. Anand Desai', email: 'anand@faculty.goenka.edu', password: 'faculty123', role: 'faculty', phone: '+91 91111 22222', avatar: '👨‍🏫', busId: 'BUS03', routeId: 'R3', feePaid: true },
 ];
 
 // Buses
 export const buses = [
-    { id: 'BUS01', number: 'GK-01', name: 'Goenka Express', capacity: 40, routeId: 'R1', driverId: 'DRV01', status: 'active', totalSeats: 40 },
-    { id: 'BUS02', number: 'GK-02', name: 'Campus Cruiser', capacity: 36, routeId: 'R2', driverId: 'DRV02', status: 'active', totalSeats: 36 },
-    { id: 'BUS03', number: 'GK-03', name: 'Scholar Shuttle', capacity: 40, routeId: 'R3', driverId: 'DRV03', status: 'active', totalSeats: 40 },
-    { id: 'BUS04', number: 'GK-04', name: 'Knowledge Kart', capacity: 32, routeId: 'R4', driverId: 'DRV04', status: 'maintenance', totalSeats: 32 },
-    { id: 'BUS05', number: 'GK-05', name: 'Quick Connect', capacity: 36, routeId: 'R5', driverId: 'DRV05', status: 'active', totalSeats: 36 },
+    { id: 'BUS01', number: 'GK-01', name: 'Goenka Express', capacity: 51, routeId: 'R1', driverId: 'DRV01', status: 'active', totalSeats: 51 },
+    { id: 'BUS02', number: 'GK-02', name: 'Campus Cruiser', capacity: 51, routeId: 'R2', driverId: 'DRV02', status: 'active', totalSeats: 51 },
+    { id: 'BUS03', number: 'GK-03', name: 'Scholar Shuttle', capacity: 51, routeId: 'R3', driverId: 'DRV03', status: 'active', totalSeats: 51 },
+    { id: 'BUS04', number: 'GK-04', name: 'Knowledge Kart', capacity: 51, routeId: 'R4', driverId: 'DRV04', status: 'maintenance', totalSeats: 51 },
+    { id: 'BUS05', number: 'GK-05', name: 'Quick Connect', capacity: 51, routeId: 'R5', driverId: 'DRV05', status: 'active', totalSeats: 51 },
 ];
 
 // Drivers
@@ -110,15 +110,18 @@ export const complaints = [
     { id: 'CMP005', studentId: 'STU001', studentName: 'Arjun Sharma', busId: 'BUS01', category: 'Seat', subject: 'AC not working properly', description: 'The air conditioning on the left side of the bus is not cooling properly.', status: 'in_progress', date: '2026-02-24', response: 'Technician will inspect tomorrow.' },
 ];
 
-// Seat layouts for buses (2+2 configuration with aisle)
+// Seat layouts for buses (2+2 configuration with aisle, last row 3 seats)
+// 12 rows × 4 seats = 48, + 1 last row × 3 seats = 51 total
 export function generateSeatLayout(busId, capacity) {
-    const rows = Math.ceil(capacity / 4);
+    const fullRows = Math.floor(capacity / 4);      // 12 full rows
+    const lastRowSeats = capacity % 4;               // 3 remaining seats
     const layout = [];
     const bookedSeats = getBookedSeats(busId);
+    const labels = ['A', 'B', 'C', 'D'];
 
-    for (let r = 0; r < rows; r++) {
+    // Full rows (4 seats each)
+    for (let r = 0; r < fullRows; r++) {
         const row = [];
-        const labels = ['A', 'B', 'C', 'D'];
         for (let s = 0; s < 4; s++) {
             const seatNumber = `${labels[s]}${r + 1}`;
             const isBooked = bookedSeats[seatNumber];
@@ -134,6 +137,27 @@ export function generateSeatLayout(busId, capacity) {
         }
         layout.push(row);
     }
+
+    // Last row (3 seats for 51-seat buses)
+    if (lastRowSeats > 0) {
+        const row = [];
+        const lastRowNum = fullRows + 1;
+        for (let s = 0; s < lastRowSeats; s++) {
+            const seatNumber = `${labels[s]}${lastRowNum}`;
+            const isBooked = bookedSeats[seatNumber];
+            row.push({
+                id: `${busId}-${seatNumber}`,
+                seatNumber,
+                row: lastRowNum,
+                col: s,
+                isBooked: !!isBooked,
+                studentName: isBooked?.name || null,
+                studentId: isBooked?.id || null,
+            });
+        }
+        layout.push(row);
+    }
+
     return layout;
 }
 

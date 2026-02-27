@@ -59,8 +59,8 @@ export function TransportProvider({ children }) {
                 if (!bRes.error && bRes.data.length > 0) {
                     const fetchedBuses = bRes.data.map(b => ({
                         id: b.id, number: b.number || b.id, name: b.name || b.id,
-                        capacity: b.total_seats || b.capacity || 40, routeId: b.route_id, driverId: b.driver_id,
-                        status: b.status || 'active', totalSeats: b.total_seats || 40,
+                        capacity: b.total_seats || b.capacity || 51, routeId: b.route_id, driverId: b.driver_id,
+                        status: b.status || 'active', totalSeats: b.total_seats || 51,
                     }));
                     setBuses(fetchedBuses);
 
@@ -252,7 +252,7 @@ export function TransportProvider({ children }) {
     const getSeatLayout = useCallback((busId) => {
         const bus = buses.find(b => b.id === busId);
         if (!bus) return [];
-        const layout = mockSeatLayout(busId, bus.totalSeats || bus.capacity || 40);
+        const layout = mockSeatLayout(busId, bus.totalSeats || bus.capacity || 51);
         const bk = seatBookings[busId] || {};
         return layout.map(row => row.map(seat => ({
             ...seat, isBooked: seat.isBooked || !!bk[seat.seatNumber],

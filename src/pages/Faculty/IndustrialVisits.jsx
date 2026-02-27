@@ -4,6 +4,8 @@ import { useAuth } from '../../context/AuthContext';
 import { useTransport } from '../../context/TransportContext';
 import './IndustrialVisits.css';
 
+const BUS_CAPACITY = 51;
+
 export default function IndustrialVisits() {
     const { user } = useAuth();
     const { industrialVisits, addVisitRequest, buses } = useTransport();
@@ -14,8 +16,16 @@ export default function IndustrialVisits() {
     const [stops, setStops] = useState([]);
     const [newStop, setNewStop] = useState('');
     const [submitted, setSubmitted] = useState(false);
+    const [validationError, setValidationError] = useState('');
 
     const myVisits = industrialVisits.filter(v => (v.facultyId || v.faculty_id) === user.id);
+
+    // Today's date in YYYY-MM-DD for min attribute
+    const today = new Date().toISOString().split('T')[0];
+
+    // Calculate buses needed
+    const numStudents = parseInt(students) || 0;
+    const busesNeeded = numStudents > 0 ? Math.ceil(numStudents / BUS_CAPACITY) : 0;
 
     const addStop = () => {
         if (newStop.trim() && stops.length < 10) {
@@ -30,14 +40,33 @@ export default function IndustrialVisits() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        setValidationError('');
+
+        // Date validation: block past dates
+        if (date < today) {
+            setValidationError('Cannot select a past date. Please choose today or a future date.');
+            return;
+        }
+
+        // Seat limit validation
+        const count = parseInt(students);
+        if (isNaN(count) || count < 1) {
+            setValidationError('Please enter a valid number of students.');
+            return;
+        }
+        if (count > BUS_CAPACITY) {
+            setValidationError(`Maximum ${BUS_CAPACITY} students per bus. You need ${Math.ceil(count / BUS_CAPACITY)} bus(es) for ${count} students.`);
+            return;
+        }
+
         addVisitRequest({
             facultyId: user.id,
             facultyName: user.name,
             destination,
             date,
-            students: parseInt(students),
+            students: count,
             purpose,
-            stops, // intermediate stops
+            stops,
         });
         setDestination('');
         setDate('');
@@ -73,11 +102,30 @@ export default function IndustrialVisits() {
                         </div>
                         <div className="form-group">
                             <label className="form-label">Visit Date *</label>
-                            <input type="date" className="form-input" value={date} onChange={(e) => setDate(e.target.value)} required />
+                            <input type="date" className="form-input" value={date} onChange={(e) => setDate(e.target.value)} min={today} required />
+                            <span style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-muted)', marginTop: '4px', display: 'block' }}>
+                                Only today or future dates allowed
+                            </span>
                         </div>
                         <div className="form-group">
                             <label className="form-label">Number of Students *</label>
-                            <input type="number" className="form-input" value={students} onChange={(e) => setStudents(e.target.value)} placeholder="e.g. 35" min="1" max="100" required />
+                            <input type="number" className="form-input" value={students} onChange={(e) => setStudents(e.target.value)} placeholder="e.g. 35" min="1" max={BUS_CAPACITY} required />
+                            <span style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-muted)', marginTop: '4px', display: 'block' }}>
+                                Max {BUS_CAPACITY} students per bus
+                            </span>
+                            {busesNeeded > 0 && (
+                                <span style={{
+                                    fontSize: 'var(--fs-xs)',
+                                    color: busesNeeded > 1 ? '#fdcb6e' : '#00b894',
+                                    marginTop: '4px',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    gap: '4px',
+                                    fontWeight: 600,
+                                }}>
+                                    🚌 {busesNeeded} bus{busesNeeded > 1 ? 'es' : ''} needed
+                                </span>
+                            )}
                         </div>
 
                         {/* Intermediate Stops */}
@@ -115,6 +163,20 @@ export default function IndustrialVisits() {
                             <label className="form-label">Purpose *</label>
                             <textarea className="form-textarea" value={purpose} onChange={(e) => setPurpose(e.target.value)} placeholder="Describe the purpose of the visit..." required />
                         </div>
+
+                        <AnimatePresence>
+                            {validationError && (
+                                <motion.div
+                                    className="iv-validation-error"
+                                    initial={{ opacity: 0, y: -5 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    exit={{ opacity: 0 }}
+                                >
+                                    ⚠️ {validationError}
+                                </motion.div>
+                            )}
+                        </AnimatePresence>
+
                         <motion.button type="submit" className="iv-submit-btn" whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
                             Submit Request
                         </motion.button>

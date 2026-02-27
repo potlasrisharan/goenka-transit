@@ -92,7 +92,10 @@ export default function BusTracking() {
                             center={center}
                             zoom={13}
                             style={{ height: '100%', width: '100%' }}
-                            zoomControl={false}
+                            zoomControl={true}
+                            scrollWheelZoom={true}
+                            doubleClickZoom={true}
+                            touchZoom={true}
                         >
                             <TileLayer
                                 url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
