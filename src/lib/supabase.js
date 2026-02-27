@@ -39,9 +39,16 @@ export const supabase = supabaseRealUrl && supabaseAnonKey
         },
         global: {
             fetch: (...args) => {
+                let [url, options] = args;
+
+                // Route HTTP requests through the Vercel proxy to bypass strict Mobile network blockers
+                // This does NOT affect WebSockets (wss://), which will still connect directly to the real Supabase URL!
+                if (typeof window !== 'undefined' && typeof url === 'string' && supabaseRealUrl) {
+                    url = url.replace(supabaseRealUrl, window.location.origin + '/api/supabase');
+                }
+
                 // iOS Safari/Chrome drops keepalive requests aggressively, leading to ERR_CONNECTION_TIMED_OUT
                 // We strip keepalive from the fetch options to force standard connections.
-                const [url, options] = args;
                 if (options && options.keepalive) {
                     delete options.keepalive;
                 }
