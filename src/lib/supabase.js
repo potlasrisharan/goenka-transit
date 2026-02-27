@@ -34,6 +34,17 @@ export const supabase = supabaseUrl && supabaseAnonKey
             persistSession: true,
             autoRefreshToken: true,
         },
+        global: {
+            fetch: (...args) => {
+                // iOS Safari/Chrome drops keepalive requests aggressively, leading to ERR_CONNECTION_TIMED_OUT
+                // We strip keepalive from the fetch options to force standard connections.
+                const [url, options] = args;
+                if (options && options.keepalive) {
+                    delete options.keepalive;
+                }
+                return fetch(url, options);
+            },
+        }
     })
     : null;
 
