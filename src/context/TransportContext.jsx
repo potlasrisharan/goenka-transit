@@ -31,15 +31,15 @@ export function TransportProvider({ children }) {
         if (!isSupabaseConfigured()) return;
         async function fetchAll() {
             try {
-                const rRes = await supabase.from('routes').select('*').catch(e => ({ error: e }));
-                const bRes = await supabase.from('buses').select('*').catch(e => ({ error: e }));
-                const dRes = await supabase.from('drivers').select('*').catch(e => ({ error: e }));
-                const sRes = await supabase.from('students').select('*').catch(e => ({ error: e }));
-                const cRes = await supabase.from('complaints').select('*').order('created_at', { ascending: false }).catch(e => ({ error: e }));
-                const stRes = await supabase.from('seats').select('*').catch(e => ({ error: e }));
-                const stopsRes = await supabase.from('stops').select('*').order('stop_order', { ascending: true }).catch(e => ({ error: e }));
-                const bcrRes = await supabase.from('bus_change_requests').select('*').order('created_at', { ascending: false }).catch(e => ({ error: e }));
-                const ivRes = await supabase.from('industrial_visits').select('*').order('created_at', { ascending: false }).catch(e => ({ error: e }));
+                const rRes = await supabase.from('routes').select('*');
+                const bRes = await supabase.from('buses').select('*');
+                const dRes = await supabase.from('drivers').select('*');
+                const sRes = await supabase.from('students').select('*');
+                const cRes = await supabase.from('complaints').select('*').order('created_at', { ascending: false });
+                const stRes = await supabase.from('seats').select('*');
+                const stopsRes = await supabase.from('stops').select('*').order('stop_order', { ascending: true });
+                const bcrRes = await supabase.from('bus_change_requests').select('*').order('created_at', { ascending: false });
+                const ivRes = await supabase.from('industrial_visits').select('*').order('created_at', { ascending: false });
                 let used = false;
                 if (!rRes.error && rRes.data.length > 0) {
                     // Attach stops to routes
