@@ -452,10 +452,22 @@ export function TransportProvider({ children }) {
             return updated;
         });
         if (isSupabaseConfigured()) {
-            const { error } = await supabase.from('complaints').insert({ id: newId, student_id: c.studentId, student_name: c.studentName, bus_id: c.busId, category: c.category, subject: c.subject, message: c.description, status: 'pending' });
-            if (error) {
-                console.error('[Supabase Error - addComplaint]', error);
-                alert(`Failed to save complaint to database: ${error.message}`);
+            try {
+                const { error, data } = await supabase.from('complaints').insert({
+                    id: newId, student_id: c.studentId, student_name: c.studentName,
+                    bus_id: c.busId, category: c.category, subject: c.subject,
+                    message: c.description, status: 'pending'
+                }).select();
+
+                if (error) {
+                    console.error('[Supabase Error - addComplaint]', error);
+                    alert(`Supabase Insert Failed (Complaint):\nCode: ${error.code}\nMessage: ${error.message}\nDetails: ${error.details}`);
+                } else {
+                    console.log('[Supabase Success - addComplaint]', data);
+                }
+            } catch (err) {
+                console.error('[Supabase Exception - addComplaint]', err);
+                alert(`Supabase Network/Crash (Complaint): ${err.message}`);
             }
         } else {
             console.warn('[Supabase not configured] Complaint stored locally only.');
@@ -488,13 +500,22 @@ export function TransportProvider({ children }) {
             return updated;
         });
         if (isSupabaseConfigured()) {
-            const { error } = await supabase.from('bus_change_requests').insert({
-                id: newId, student_id: req.student_id, student_name: req.student_name,
-                current_bus_id: req.current_bus_id, requested_bus_id: req.requested_bus_id, reason: req.reason,
-            });
-            if (error) {
-                console.error('[Supabase Error - submitBusChangeRequest]', error);
-                alert(`Failed to submit request: ${error.message}`);
+            try {
+                const { error, data } = await supabase.from('bus_change_requests').insert({
+                    id: newId, student_id: req.student_id, student_name: req.student_name,
+                    current_bus_id: req.current_bus_id, requested_bus_id: req.requested_bus_id,
+                    reason: req.reason, status: 'pending'
+                }).select();
+
+                if (error) {
+                    console.error('[Supabase Error - submitBusChangeRequest]', error);
+                    alert(`Supabase Insert Failed (Bus Change):\nCode: ${error.code}\nMessage: ${error.message}\nDetails: ${error.details}`);
+                } else {
+                    console.log('[Supabase Success - submitBusChangeRequest]', data);
+                }
+            } catch (err) {
+                console.error('[Supabase Exception - submitBusChangeRequest]', err);
+                alert(`Supabase Network/Crash (Bus Change): ${err.message}`);
             }
         }
     }, []);
@@ -543,14 +564,23 @@ export function TransportProvider({ children }) {
             return updated;
         });
         if (isSupabaseConfigured()) {
-            const { error } = await supabase.from('industrial_visits').insert({
-                id: newId, faculty_id: v.facultyId, faculty_name: v.facultyName, destination: v.destination,
-                visit_date: v.date, num_students: v.students,
-                purpose: v.purpose + (v.stops?.length ? `\n[STOPS]${JSON.stringify(v.stops)}` : ''),
-            });
-            if (error) {
-                console.error('[Supabase Error - addVisitRequest]', error);
-                alert(`Failed to submit visit request: ${error.message}`);
+            try {
+                const { error, data } = await supabase.from('industrial_visits').insert({
+                    id: newId, faculty_id: v.facultyId, faculty_name: v.facultyName, destination: v.destination,
+                    visit_date: v.date, num_students: v.students,
+                    purpose: v.purpose + (v.stops?.length ? `\n[STOPS]${JSON.stringify(v.stops)}` : ''),
+                    status: 'pending'
+                }).select();
+
+                if (error) {
+                    console.error('[Supabase Error - addVisitRequest]', error);
+                    alert(`Supabase Insert Failed (Visit):\nCode: ${error.code}\nMessage: ${error.message}\nDetails: ${error.details}`);
+                } else {
+                    console.log('[Supabase Success - addVisitRequest]', data);
+                }
+            } catch (err) {
+                console.error('[Supabase Exception - addVisitRequest]', err);
+                alert(`Supabase Network/Crash (Visit): ${err.message}`);
             }
         }
     }, []);
