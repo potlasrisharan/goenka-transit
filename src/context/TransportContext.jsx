@@ -119,14 +119,28 @@ export function TransportProvider({ children }) {
                     });
                     setSeatBookings(bookingMap);
                 }
-                if (!bcrRes.error) setBusChangeRequests(bcrRes.data || []);
-                if (!ivRes.error && ivRes.data.length > 0) {
-                    setVisits(ivRes.data.map(v => ({
+                if (!bcrRes.error) {
+                    setBusChangeRequests((bcrRes.data || []).map(r => ({
+                        ...r,
+                        studentId: r.student_id || r.studentId,
+                        studentName: r.student_name || r.studentName,
+                        busId: r.current_bus_id || r.busId,
+                        requestedBusId: r.requested_bus_id || r.requestedBusId,
+                        reason: r.reason,
+                        status: r.status || 'pending',
+                        date: r.created_at?.split('T')[0] || r.date,
+                    })));
+                    used = true;
+                }
+                if (!ivRes.error) {
+                    setVisits((ivRes.data || []).map(v => ({
                         id: v.id, facultyId: v.faculty_id, facultyName: v.faculty_name,
                         destination: v.destination, date: v.visit_date, students: v.num_students,
                         purpose: v.purpose, status: v.status, busAssigned: v.bus_assigned,
                         createdAt: v.created_at?.split('T')[0],
+                        stops: v.purpose?.includes('[STOPS]') ? JSON.parse(v.purpose.split('[STOPS]')[1] || '[]') : [],
                     })));
+                    used = true;
                 }
                 if (used) { setDataSource('supabase'); console.log('[TransportContext] ✅ Using Supabase data'); }
             } catch (err) { console.error('[TransportContext] Fetch error:', err); }
