@@ -12,6 +12,17 @@ import {
 
 const TransportContext = createContext(null);
 
+// ── BroadcastChannel cross-tab sync ──
+// This allows different browser tabs to share data without any server.
+// When a student submits a complaint in Tab 1, Transport Head in Tab 2 sees it instantly.
+const CHANNEL_NAME = 'goenka-transit-sync';
+const LS_COMPLAINTS = 'gt_complaints';
+const LS_VISITS = 'gt_visits';
+const LS_BUS_CHANGES = 'gt_bus_changes';
+
+const lsGet = (key, fallback) => { try { const v = localStorage.getItem(key); return v ? JSON.parse(v) : fallback; } catch { return fallback; } };
+const lsSet = (key, val) => { try { localStorage.setItem(key, JSON.stringify(val)); } catch { } };
+
 export function TransportProvider({ children }) {
     const [buses, setBuses] = useState(mockBuses);
     const [drivers, setDrivers] = useState(mockDrivers);
@@ -25,6 +36,72 @@ export function TransportProvider({ children }) {
     const [seatBookings, setSeatBookings] = useState({});
     const [dataSource, setDataSource] = useState('mock');
     const intervalRef = useRef(null);
+    const channelRef = useRef(null);
+
+    // ── Load persisted data from localStorage on mount ──
+    useEffect(() => {
+        const savedComplaints = lsGet(LS_COMPLAINTS, null);
+        if (savedComplaints && savedComplaints.length > 0) setComplaints(savedComplaints);
+        const savedVisits = lsGet(LS_VISITS, null);
+        if (savedVisits && savedVisits.length > 0) setVisits(savedVisits);
+        const savedChanges = lsGet(LS_BUS_CHANGES, null);
+        if (savedChanges && savedChanges.length > 0) setBusChangeRequests(savedChanges);
+
+        // ── BroadcastChannel: listen for updates from other tabs ──
+        const channel = new BroadcastChannel(CHANNEL_NAME);
+        channelRef.current = channel;
+        channel.onmessage = ({ data }) => {
+            if (data.type === 'NEW_COMPLAINT') {
+                setComplaints(p => {
+                    if (p.find(c => c.id === data.payload.id)) return p;
+                    const updated = [data.payload, ...p];
+                    lsSet(LS_COMPLAINTS, updated);
+                    return updated;
+                });
+            } else if (data.type === 'UPDATE_COMPLAINT') {
+                setComplaints(p => {
+                    const updated = p.map(c => c.id === data.payload.id ? { ...c, ...data.payload } : c);
+                    lsSet(LS_COMPLAINTS, updated);
+                    return updated;
+                });
+            } else if (data.type === 'NEW_VISIT') {
+                setVisits(p => {
+                    if (p.find(v => v.id === data.payload.id)) return p;
+                    const updated = [data.payload, ...p];
+                    lsSet(LS_VISITS, updated);
+                    return updated;
+                });
+            } else if (data.type === 'UPDATE_VISIT') {
+                setVisits(p => {
+                    const updated = p.map(v => v.id === data.payload.id ? { ...v, ...data.payload } : v);
+                    lsSet(LS_VISITS, updated);
+                    return updated;
+                });
+            } else if (data.type === 'NEW_BUS_CHANGE') {
+                setBusChangeRequests(p => {
+                    if (p.find(r => r.id === data.payload.id)) return p;
+                    const updated = [data.payload, ...p];
+                    lsSet(LS_BUS_CHANGES, updated);
+                    return updated;
+                });
+            } else if (data.type === 'UPDATE_BUS_CHANGE') {
+                setBusChangeRequests(p => {
+                    const updated = p.map(r => r.id === data.payload.id ? { ...r, ...data.payload } : r);
+                    lsSet(LS_BUS_CHANGES, updated);
+                    return updated;
+                });
+            } else if (data.type === 'NEW_SEAT') {
+                setSeatBookings(prev => ({
+                    ...prev,
+                    [data.payload.busId]: {
+                        ...(prev[data.payload.busId] || {}),
+                        [data.payload.seatNumber]: { name: data.payload.studentName, id: data.payload.studentId }
+                    }
+                }));
+            }
+        };
+        return () => channel.close();
+    }, []);
 
     // ── Supabase Data Fetching ──
     useEffect(() => {
@@ -286,28 +363,38 @@ export function TransportProvider({ children }) {
     }, [seatBookings]);
 
     const bookSeat = useCallback(async (busId, seatNumber, studentName, studentId) => {
-        // Enforce one seat per semester
         const existing = getStudentBooking(studentId);
-        if (existing) {
-            return { success: false, error: `You already have Seat ${existing.seatNumber} on Bus ${existing.busId}. One seat per semester.` };
-        }
-        setSeatBookings(p => ({ ...p, [busId]: { ...(p[busId] || {}), [seatNumber]: { name: studentName, id: studentId } } }));
-        if (isSupabaseConfigured()) {
-            await supabase.from('seats').upsert({ bus_id: busId, seat_number: seatNumber, student_id: studentId, is_booked: true }, { onConflict: 'bus_id,seat_number' });
-        }
+        if (existing) return { success: false, error: `You already have Seat ${existing.seatNumber} on Bus ${existing.busId}. One seat per semester.` };
+        setSeatBookings(p => {
+            const updated = { ...p, [busId]: { ...(p[busId] || {}), [seatNumber]: { name: studentName, id: studentId } } };
+            channelRef.current?.postMessage({ type: 'NEW_SEAT', payload: { busId, seatNumber, studentName, studentId } });
+            return updated;
+        });
+        if (isSupabaseConfigured()) await supabase.from('seats').upsert({ bus_id: busId, seat_number: seatNumber, student_id: studentId, is_booked: true }, { onConflict: 'bus_id,seat_number' });
         return { success: true };
     }, [getStudentBooking]);
 
     const addComplaint = useCallback(async (c) => {
         const newC = { ...c, id: `CMP${Date.now()}`, status: 'pending', date: new Date().toISOString().split('T')[0], response: null };
-        setComplaints(p => [newC, ...p]);
+        setComplaints(p => {
+            const updated = [newC, ...p];
+            lsSet(LS_COMPLAINTS, updated);
+            channelRef.current?.postMessage({ type: 'NEW_COMPLAINT', payload: newC });
+            return updated;
+        });
         if (isSupabaseConfigured()) {
             await supabase.from('complaints').insert({ student_id: c.studentId, student_name: c.studentName, bus_id: c.busId, category: c.category, subject: c.subject, message: c.description, status: 'pending' });
         }
     }, []);
 
     const updateComplaintStatus = useCallback(async (id, status, response) => {
-        setComplaints(p => p.map(c => c.id === id ? { ...c, status, response: response || c.response } : c));
+        setComplaints(p => {
+            const updated = p.map(c => c.id === id ? { ...c, status, response: response || c.response } : c);
+            lsSet(LS_COMPLAINTS, updated);
+            const updatedItem = updated.find(c => c.id === id);
+            if (updatedItem) channelRef.current?.postMessage({ type: 'UPDATE_COMPLAINT', payload: updatedItem });
+            return updated;
+        });
         if (isSupabaseConfigured()) {
             const updates = { status };
             if (response) updates.response = response;
@@ -319,61 +406,63 @@ export function TransportProvider({ children }) {
     const submitBusChangeRequest = useCallback(async (req) => {
         const tempId = `BCR_${Date.now()}_${Math.random().toString(36).slice(2, 7)}`;
         const newReq = { ...req, id: tempId, status: 'pending', created_at: new Date().toISOString() };
-        setBusChangeRequests(p => [newReq, ...p]);
+        setBusChangeRequests(p => {
+            const updated = [newReq, ...p];
+            lsSet(LS_BUS_CHANGES, updated);
+            channelRef.current?.postMessage({ type: 'NEW_BUS_CHANGE', payload: newReq });
+            return updated;
+        });
         if (isSupabaseConfigured()) {
             const { data } = await supabase.from('bus_change_requests').insert({
                 student_id: req.student_id, student_name: req.student_name,
                 current_bus_id: req.current_bus_id, requested_bus_id: req.requested_bus_id, reason: req.reason,
             }).select();
-            if (data?.[0]) {
-                // Replace temp ID with real Supabase ID
-                setBusChangeRequests(p => p.map(r => r.id === tempId ? { ...data[0] } : r));
-            }
+            if (data?.[0]) setBusChangeRequests(p => p.map(r => r.id === tempId ? { ...data[0] } : r));
         }
     }, []);
 
     const approveBusChange = useCallback(async (id, approved, note) => {
         const targetReq = busChangeRequests.find(r => r.id === id);
         if (!targetReq) return;
-
         const status = approved ? 'approved' : 'rejected';
-
         if (approved) {
-            // Approve this one, auto-reject all other PENDING requests from the same student
             const studentId = targetReq.student_id || targetReq.studentId;
-            setBusChangeRequests(p => p.map(r => {
-                if (r.id === id) return { ...r, status: 'approved', admin_note: note };
-                if ((r.student_id || r.studentId) === studentId && r.status === 'pending') {
-                    return { ...r, status: 'rejected', admin_note: 'Auto-rejected: another request was approved' };
-                }
-                return r;
-            }));
-
+            setBusChangeRequests(p => {
+                const updated = p.map(r => {
+                    if (r.id === id) return { ...r, status: 'approved', admin_note: note };
+                    if ((r.student_id || r.studentId) === studentId && r.status === 'pending') return { ...r, status: 'rejected', admin_note: 'Auto-rejected: another request was approved' };
+                    return r;
+                });
+                lsSet(LS_BUS_CHANGES, updated);
+                updated.forEach(r => channelRef.current?.postMessage({ type: 'UPDATE_BUS_CHANGE', payload: r }));
+                return updated;
+            });
             if (isSupabaseConfigured()) {
-                // Update the approved request
-                await supabase.from('bus_change_requests').update({ status: 'approved', admin_note: note, updated_at: new Date().toISOString() }).eq('id', id);
-                // Auto-reject other pending requests from same student
-                await supabase.from('bus_change_requests')
-                    .update({ status: 'rejected', admin_note: 'Auto-rejected: another request was approved', updated_at: new Date().toISOString() })
-                    .eq('student_id', studentId)
-                    .eq('status', 'pending')
-                    .neq('id', id);
-                // Update student's bus assignment
+                await supabase.from('bus_change_requests').update({ status: 'approved', admin_note: note }).eq('id', id);
+                await supabase.from('bus_change_requests').update({ status: 'rejected', admin_note: 'Auto-rejected' }).eq('student_id', studentId).eq('status', 'pending').neq('id', id);
                 await supabase.from('students').update({ bus_id: targetReq.requested_bus_id }).eq('id', studentId);
             }
         } else {
-            // Just reject this one request
-            setBusChangeRequests(p => p.map(r => r.id === id ? { ...r, status: 'rejected', admin_note: note } : r));
-            if (isSupabaseConfigured()) {
-                await supabase.from('bus_change_requests').update({ status: 'rejected', admin_note: note, updated_at: new Date().toISOString() }).eq('id', id);
-            }
+            setBusChangeRequests(p => {
+                const updated = p.map(r => r.id === id ? { ...r, status: 'rejected', admin_note: note } : r);
+                lsSet(LS_BUS_CHANGES, updated);
+                const updatedItem = updated.find(r => r.id === id);
+                if (updatedItem) channelRef.current?.postMessage({ type: 'UPDATE_BUS_CHANGE', payload: updatedItem });
+                return updated;
+            });
+            if (isSupabaseConfigured()) await supabase.from('bus_change_requests').update({ status: 'rejected', admin_note: note }).eq('id', id);
         }
     }, [busChangeRequests]);
 
     // ── Industrial Visits ──
     const addVisitRequest = useCallback(async (v) => {
         const newV = { ...v, id: `IV${Date.now()}`, status: 'pending', busAssigned: null, createdAt: new Date().toISOString().split('T')[0], stops: v.stops || [] };
-        setVisits(p => [newV, ...p]);
+        setVisits(p => {
+            const updated = [newV, ...p];
+            lsSet(LS_VISITS, updated);
+            channelRef.current?.postMessage({ type: 'NEW_VISIT', payload: newV });
+            return updated;
+        });
         if (isSupabaseConfigured()) {
             await supabase.from('industrial_visits').insert({
                 faculty_id: v.facultyId, faculty_name: v.facultyName, destination: v.destination,
@@ -384,17 +473,25 @@ export function TransportProvider({ children }) {
     }, []);
 
     const approveVisitRequest = useCallback(async (id, busId, note) => {
-        setVisits(p => p.map(v => v.id === id ? { ...v, status: 'approved', busAssigned: busId } : v));
-        if (isSupabaseConfigured()) {
-            await supabase.from('industrial_visits').update({ status: 'approved', bus_assigned: busId, admin_note: note }).eq('id', id);
-        }
+        setVisits(p => {
+            const updated = p.map(v => v.id === id ? { ...v, status: 'approved', busAssigned: busId } : v);
+            lsSet(LS_VISITS, updated);
+            const updatedItem = updated.find(v => v.id === id);
+            if (updatedItem) channelRef.current?.postMessage({ type: 'UPDATE_VISIT', payload: updatedItem });
+            return updated;
+        });
+        if (isSupabaseConfigured()) await supabase.from('industrial_visits').update({ status: 'approved', bus_assigned: busId, admin_note: note }).eq('id', id);
     }, []);
 
     const updateVisitStatus = useCallback(async (id, status, busAssigned) => {
-        setVisits(p => p.map(v => v.id === id ? { ...v, status, busAssigned: busAssigned || v.busAssigned } : v));
-        if (isSupabaseConfigured()) {
-            await supabase.from('industrial_visits').update({ status, bus_assigned: busAssigned }).eq('id', id);
-        }
+        setVisits(p => {
+            const updated = p.map(v => v.id === id ? { ...v, status, busAssigned: busAssigned || v.busAssigned } : v);
+            lsSet(LS_VISITS, updated);
+            const updatedItem = updated.find(v => v.id === id);
+            if (updatedItem) channelRef.current?.postMessage({ type: 'UPDATE_VISIT', payload: updatedItem });
+            return updated;
+        });
+        if (isSupabaseConfigured()) await supabase.from('industrial_visits').update({ status, bus_assigned: busAssigned }).eq('id', id);
     }, []);
 
     // ── Route management (Transport Head) ──
