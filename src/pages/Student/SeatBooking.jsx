@@ -20,17 +20,27 @@ export default function SeatBooking() {
     const existingBooking = getStudentBooking(user.id);
     const existingBus = existingBooking ? buses.find(b => b.id === existingBooking.busId) : null;
 
+    const [showPaymentRedirect, setShowPaymentRedirect] = useState(false);
+
     const handleBook = async () => {
         if (selectedSeat && !selectedSeat.isBooked) {
-            const result = await bookSeat(selectedBus, selectedSeat.seatNumber, user.name, user.id);
-            if (result?.success) {
-                setBooked(true);
-                setError('');
-                setTimeout(() => setBooked(false), 3000);
-            } else {
-                setError(result?.error || 'Booking failed');
-                setTimeout(() => setError(''), 4000);
-            }
+            // 1. Show the "Heading to payment" overlay screen
+            setShowPaymentRedirect(true);
+
+            // 2. Wait 2.5 seconds to simulate redirect processing
+            setTimeout(async () => {
+                const result = await bookSeat(selectedBus, selectedSeat.seatNumber, user.name, user.id);
+                setShowPaymentRedirect(false);
+
+                if (result?.success) {
+                    setBooked(true);
+                    setError('');
+                    setTimeout(() => setBooked(false), 3000);
+                } else {
+                    setError(result?.error || 'Booking failed');
+                    setTimeout(() => setError(''), 4000);
+                }
+            }, 2500);
         }
     };
 
@@ -40,6 +50,47 @@ export default function SeatBooking() {
                 <h1>Seat Booking</h1>
                 <p>Select your preferred seat on the bus</p>
             </div>
+
+            {/* Payment Redirect Overlay */}
+            <AnimatePresence>
+                {showPaymentRedirect && (
+                    <motion.div
+                        className="payment-overlay"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        style={{
+                            position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
+                            background: 'rgba(5, 5, 20, 0.85)', backdropFilter: 'blur(12px)',
+                            zIndex: 9999, display: 'flex', flexDirection: 'column',
+                            alignItems: 'center', justifyContent: 'center', color: 'white'
+                        }}
+                    >
+                        <motion.div
+                            initial={{ scale: 0.8, y: 30 }}
+                            animate={{ scale: 1, y: 0 }}
+                            transition={{ type: 'spring', bounce: 0.5 }}
+                            style={{
+                                background: 'linear-gradient(135deg, rgba(108, 92, 231, 0.9) 0%, rgba(162, 155, 254, 0.9) 100%)',
+                                padding: '3rem 4rem', borderRadius: '24px', textAlign: 'center',
+                                boxShadow: '0 20px 40px rgba(108, 92, 231, 0.4)',
+                                border: '1px solid rgba(255, 255, 255, 0.2)'
+                            }}
+                        >
+                            <motion.div
+                                animate={{ rotate: 360 }}
+                                transition={{ duration: 1.5, repeat: Infinity, ease: 'linear' }}
+                                style={{ fontSize: '4rem', marginBottom: '1.5rem', display: 'inline-block' }}
+                            >
+                                ⏳
+                            </motion.div>
+                            <h2 style={{ fontSize: '2rem', margin: '0 0 1rem 0', fontWeight: 'bold' }}>Reserve Processing...</h2>
+                            <p style={{ fontSize: '1.2rem', opacity: 0.9, margin: 0 }}>Heading to college's dashboard for payment.</p>
+                            <p style={{ fontSize: '1rem', opacity: 0.7, marginTop: '8px' }}>Please do not close this window.</p>
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
 
             {/* Show existing booking banner */}
             {existingBooking && (
