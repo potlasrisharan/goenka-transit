@@ -1,128 +1,79 @@
-/* ============ MOCK DATA FOR GD GOENKA TRANSIT ============ */
-/* GD Goenka University – Sohna Road, Gurugram, Haryana */
+/* ============ REAL DATA – GD GOENKA UNIVERSITY TRANSIT (JAN–JUN 2026) ============ */
+/* Source: GDGU BUS ROUTES JAN-JUN 2026.xlsx */
 
 // Users
 export const users = [
     { id: 'TH001', name: 'Dr. Rajesh Kumar', email: 'transport@gdgu.org', password: 'admin123', role: 'transport_head', phone: '+91 98765 43210', avatar: '🧑‍💼' },
-    { id: 'STU001', name: 'Arjun Sharma', email: 'student@gdgu.org', password: 'student123', role: 'student', phone: '+91 90000 11111', avatar: '🧑‍🎓', busId: 'BUS01', seatNumber: 'A3', routeId: 'R1', feePaid: true, semester: 'Spring 2026' },
-    { id: 'STU002', name: 'Priya Patel', email: 'priya@gdgu.org', password: 'student123', role: 'student', phone: '+91 90000 22222', avatar: '👩‍🎓', busId: 'BUS01', seatNumber: 'B2', routeId: 'R1', feePaid: false, semester: 'Spring 2026' },
-    { id: 'STU003', name: 'Rahul Verma', email: 'rahul@gdgu.org', password: 'student123', role: 'student', phone: '+91 90000 33333', avatar: '🧑‍🎓', busId: 'BUS02', seatNumber: 'A1', routeId: 'R2', feePaid: true, semester: 'Spring 2026' },
-    { id: 'STU004', name: 'Sneha Gupta', email: 'sneha@gdgu.org', password: 'student123', role: 'student', phone: '+91 90000 44444', avatar: '👩‍🎓', busId: 'BUS02', seatNumber: null, routeId: 'R2', feePaid: true, semester: 'Spring 2026' },
-    { id: 'STU005', name: 'Vikram Singh', email: 'vikram@gdgu.org', password: 'student123', role: 'student', phone: '+91 90000 55555', avatar: '🧑‍🎓', busId: 'BUS03', seatNumber: 'C4', routeId: 'R3', feePaid: false, semester: 'Spring 2026' },
-    { id: 'FAC001', name: 'Prof. Meera Joshi', email: 'faculty@gdgu.org', password: 'faculty123', role: 'faculty', phone: '+91 91111 11111', avatar: '👩‍🏫', busId: 'BUS01', routeId: 'R1', feePaid: true },
-    { id: 'FAC002', name: 'Dr. Anand Desai', email: 'anand@gdgu.org', password: 'faculty123', role: 'faculty', phone: '+91 91111 22222', avatar: '👨‍🏫', busId: 'BUS03', routeId: 'R3', feePaid: true },
+    { id: 'STU001', name: 'Arjun Sharma', email: 'student@gdgu.org', password: 'student123', role: 'student', phone: '+91 90000 11111', avatar: '🧑‍🎓', busId: 'BUS01', seatNumber: 'A3', routeId: 'R01', feePaid: true, semester: 'Spring 2026' },
+    { id: 'STU002', name: 'Priya Patel', email: 'priya@gdgu.org', password: 'student123', role: 'student', phone: '+91 90000 22222', avatar: '👩‍🎓', busId: 'BUS02', seatNumber: 'B2', routeId: 'R02', feePaid: false, semester: 'Spring 2026' },
+    { id: 'STU003', name: 'Rahul Verma', email: 'rahul@gdgu.org', password: 'student123', role: 'student', phone: '+91 90000 33333', avatar: '🧑‍🎓', busId: 'BUS03', seatNumber: 'A1', routeId: 'R03', feePaid: true, semester: 'Spring 2026' },
+    { id: 'STU004', name: 'Sneha Gupta', email: 'sneha@gdgu.org', password: 'student123', role: 'student', phone: '+91 90000 44444', avatar: '👩‍🎓', busId: 'BUS05', seatNumber: null, routeId: 'R05', feePaid: true, semester: 'Spring 2026' },
+    { id: 'STU005', name: 'Vikram Singh', email: 'vikram@gdgu.org', password: 'student123', role: 'student', phone: '+91 90000 55555', avatar: '🧑‍🎓', busId: 'BUS07', seatNumber: 'C4', routeId: 'R07', feePaid: false, semester: 'Spring 2026' },
+    { id: 'FAC001', name: 'Prof. Meera Joshi', email: 'faculty@gdgu.org', password: 'faculty123', role: 'faculty', phone: '+91 91111 11111', avatar: '👩‍🏫', busId: 'BUS02', routeId: 'R02', feePaid: true },
+    { id: 'FAC002', name: 'Dr. Anand Desai', email: 'anand@gdgu.org', password: 'faculty123', role: 'faculty', phone: '+91 91111 22222', avatar: '👨‍🏫', busId: 'BUS04', routeId: 'R04', feePaid: true },
 ];
 
-// Buses
+// Buses (11 buses from GDGU real data, all 51-seat capacity)
 export const buses = [
-    { id: 'BUS01', number: 'GK-01', name: 'Goenka Express', capacity: 51, routeId: 'R1', driverId: 'DRV01', status: 'active', totalSeats: 51 },
-    { id: 'BUS02', number: 'GK-02', name: 'Campus Cruiser', capacity: 51, routeId: 'R2', driverId: 'DRV02', status: 'active', totalSeats: 51 },
-    { id: 'BUS03', number: 'GK-03', name: 'Scholar Shuttle', capacity: 51, routeId: 'R3', driverId: 'DRV03', status: 'active', totalSeats: 51 },
-    { id: 'BUS04', number: 'GK-04', name: 'Knowledge Kart', capacity: 51, routeId: 'R4', driverId: 'DRV04', status: 'maintenance', totalSeats: 51 },
-    { id: 'BUS05', number: 'GK-05', name: 'Quick Connect', capacity: 51, routeId: 'R5', driverId: 'DRV05', status: 'active', totalSeats: 51 },
+    { id: 'BUS01', number: 'GK-01', name: 'Route 01 – Rohini West', capacity: 51, routeId: 'R01', driverId: 'DRV01', status: 'active', totalSeats: 51 },
+    { id: 'BUS02', number: 'GK-02', name: 'Route 02 – Connaught Place', capacity: 51, routeId: 'R02', driverId: 'DRV02', status: 'active', totalSeats: 51 },
+    { id: 'BUS03', number: 'GK-03', name: 'Route 03 – Nehru Place', capacity: 51, routeId: 'R03', driverId: 'DRV03', status: 'active', totalSeats: 51 },
+    { id: 'BUS04', number: 'GK-04', name: 'Route 04 – Chatterpur', capacity: 51, routeId: 'R04', driverId: 'DRV04', status: 'active', totalSeats: 51 },
+    { id: 'BUS05', number: 'GK-05', name: 'Route 05 – Janakpuri–Dwarka', capacity: 51, routeId: 'R05', driverId: 'DRV05', status: 'active', totalSeats: 51 },
+    { id: 'BUS06', number: 'GK-06', name: 'Route 06 – Dwarka More', capacity: 51, routeId: 'R06', driverId: 'DRV06', status: 'active', totalSeats: 51 },
+    { id: 'BUS07', number: 'GK-07', name: 'Route 07 – Najafgarh–Palam Vihar', capacity: 51, routeId: 'R07', driverId: 'DRV07', status: 'active', totalSeats: 51 },
+    { id: 'BUS08', number: 'GK-08', name: 'Route 08 – Ashok Vihar Gurugram', capacity: 51, routeId: 'R08', driverId: 'DRV08', status: 'active', totalSeats: 51 },
+    { id: 'BUS09', number: 'GK-09', name: 'Route 09 – HUDA City Center', capacity: 51, routeId: 'R09', driverId: 'DRV09', status: 'active', totalSeats: 51 },
+    { id: 'BUS10', number: 'GK-10', name: 'Route 10 – Manesar SPR', capacity: 51, routeId: 'R10', driverId: 'DRV10', status: 'active', totalSeats: 51 },
+    { id: 'BUS11', number: 'GK-11', name: 'Route 11 – Ballabhgarh–Faridabad', capacity: 51, routeId: 'R11', driverId: 'DRV11', status: 'active', totalSeats: 51 },
 ];
 
-// Drivers
+// Drivers (real names & phone numbers from GDGU data)
 export const drivers = [
-    { id: 'DRV01', name: 'Ramesh Yadav', phone: '+91 80000 11111', license: 'HR-2024-001234', busId: 'BUS01', status: 'on_duty', experience: '8 yrs', photo: '🧔', rating: 4.6, conductorName: 'Suresh Kumar', conductorPhone: '+91 80000 11112' },
-    { id: 'DRV02', name: 'Vijay Singh', phone: '+91 80000 22222', license: 'HR-2024-005678', busId: 'BUS02', status: 'on_duty', experience: '5 yrs', photo: '👨', rating: 4.8, conductorName: 'Manoj Tiwari', conductorPhone: '+91 80000 22223' },
-    { id: 'DRV03', name: 'Kiran Pal', phone: '+91 80000 33333', license: 'HR-2024-009101', busId: 'BUS03', status: 'on_duty', experience: '12 yrs', photo: '👴', rating: 4.9, conductorName: 'Ashok Meena', conductorPhone: '+91 80000 33334' },
-    { id: 'DRV04', name: 'Deepak Sharma', phone: '+91 80000 44444', license: 'HR-2024-001122', busId: 'BUS04', status: 'off_duty', experience: '3 yrs', photo: '🧑', rating: 4.3, conductorName: 'Ravi Das', conductorPhone: '+91 80000 44445' },
-    { id: 'DRV05', name: 'Sanjay Mishra', phone: '+91 80000 55555', license: 'HR-2024-003344', busId: 'BUS05', status: 'on_duty', experience: '7 yrs', photo: '👤', rating: 4.5, conductorName: 'Amit Chauhan', conductorPhone: '+91 80000 55556' },
+    { id: 'DRV01', name: 'Shashi Lal', phone: '—', license: 'HR-2025-001', busId: 'BUS01', status: 'on_duty', experience: '—', photo: '🧔', rating: 4.6, conductorName: 'Rahul Saini', conductorPhone: '—' },
+    { id: 'DRV02', name: 'Rumal Singh', phone: '—', license: 'HR-2025-002', busId: 'BUS02', status: 'on_duty', experience: '—', photo: '👨', rating: 4.8, conductorName: 'SC Das Adhikari', conductorPhone: '—' },
+    { id: 'DRV03', name: 'Anil Kumar Anil Sharma', phone: '+91 7303991843', license: 'HR-2025-003', busId: 'BUS03', status: 'on_duty', experience: '—', photo: '👨', rating: 4.7, conductorName: 'Vijay Morya', conductorPhone: '+91 9650863415' },
+    { id: 'DRV04', name: 'Ramvakil', phone: '+91 9557591338', license: 'HR-2025-004', busId: 'BUS04', status: 'on_duty', experience: '—', photo: '🧔', rating: 4.9, conductorName: 'Virender', conductorPhone: '+91 9971971123' },
+    { id: 'DRV05', name: 'Bacchu Singh', phone: '+91 9311210008', license: 'HR-2025-005', busId: 'BUS05', status: 'on_duty', experience: '—', photo: '🧑', rating: 4.5, conductorName: 'Govind', conductorPhone: '+91 9634759519' },
+    { id: 'DRV06', name: 'Satbir Sharma', phone: '+91 7011563329', license: 'HR-2025-006', busId: 'BUS06', status: 'on_duty', experience: '—', photo: '👤', rating: 4.4, conductorName: 'Maan Singh', conductorPhone: '+91 7834813540' },
+    { id: 'DRV07', name: 'Vinod', phone: '+91 9468032912', license: 'HR-2025-007', busId: 'BUS07', status: 'on_duty', experience: '—', photo: '👨', rating: 4.6, conductorName: 'Dinesh', conductorPhone: '+91 7988985801' },
+    { id: 'DRV08', name: 'Naresh Kumar', phone: '+91 8059088438', license: 'HR-2025-008', busId: 'BUS08', status: 'on_duty', experience: '—', photo: '🧔', rating: 4.5, conductorName: 'Pravesh Kumar', conductorPhone: '+91 7988302039' },
+    { id: 'DRV09', name: 'Neeraj', phone: '+91 9588146175', license: 'HR-2025-009', busId: 'BUS09', status: 'on_duty', experience: '—', photo: '👤', rating: 4.7, conductorName: 'Sriram', conductorPhone: '+91 9918663271' },
+    { id: 'DRV10', name: 'Mahender', phone: '+91 7056574055', license: 'HR-2025-010', busId: 'BUS10', status: 'on_duty', experience: '—', photo: '🧑', rating: 4.3, conductorName: 'Santosh', conductorPhone: '+91 9211528110' },
+    { id: 'DRV11', name: 'Baldev', phone: '+91 9458856713', license: 'HR-2025-011', busId: 'BUS11', status: 'on_duty', experience: '—', photo: '👨', rating: 4.8, conductorName: 'Premraj', conductorPhone: '+91 8607542254' },
 ];
 
-// Routes (GD Goenka University, Sohna Road, Gurugram → Delhi/NCR)
-// GDGU Campus approx: Lat 28.257, Lng 77.050
-export const routes = [
-    {
-        id: 'R1', name: 'Route A – Gurugram City',
-        stops: [
-            { name: 'GDGU Campus Gate', lat: 28.2570, lng: 77.0500, time: '7:00 AM' },
-            { name: 'Sohna Chowk', lat: 28.2470, lng: 77.0650, time: '7:10 AM' },
-            { name: 'Subhash Chowk', lat: 28.4190, lng: 77.0420, time: '7:30 AM' },
-            { name: 'Sector 56 Huda Market', lat: 28.4260, lng: 77.0680, time: '7:40 AM' },
-            { name: 'IFFCO Chowk', lat: 28.4729, lng: 77.0725, time: '7:55 AM' },
-            { name: 'GDGU Campus Main', lat: 28.2570, lng: 77.0500, time: '9:00 AM' },
-        ],
-        totalDistance: '52 km',
-        estimatedTime: '2 hr',
-        color: '#6c5ce7',
-    },
-    {
-        id: 'R2', name: 'Route B – Delhi South',
-        stops: [
-            { name: 'GDGU Campus Gate', lat: 28.2570, lng: 77.0500, time: '6:45 AM' },
-            { name: 'Sohna Road Toll', lat: 28.3590, lng: 77.0370, time: '7:00 AM' },
-            { name: 'Mehrauli', lat: 28.5253, lng: 77.1851, time: '7:30 AM' },
-            { name: 'Saket Metro', lat: 28.5215, lng: 77.2029, time: '7:40 AM' },
-            { name: 'Hauz Khas', lat: 28.5494, lng: 77.2001, time: '7:50 AM' },
-            { name: 'GDGU Campus Main', lat: 28.2570, lng: 77.0500, time: '9:15 AM' },
-        ],
-        totalDistance: '65 km',
-        estimatedTime: '2 hr 30 min',
-        color: '#00cec9',
-    },
-    {
-        id: 'R3', name: 'Route C – Faridabad Link',
-        stops: [
-            { name: 'GDGU Campus Gate', lat: 28.2570, lng: 77.0500, time: '6:50 AM' },
-            { name: 'Ballabgarh', lat: 28.3424, lng: 77.3221, time: '7:15 AM' },
-            { name: 'Sector 15 Faridabad', lat: 28.3889, lng: 77.3148, time: '7:30 AM' },
-            { name: 'NIT Faridabad', lat: 28.3670, lng: 77.3200, time: '7:40 AM' },
-            { name: 'Badarpur Border', lat: 28.5090, lng: 77.3040, time: '7:55 AM' },
-            { name: 'GDGU Campus Main', lat: 28.2570, lng: 77.0500, time: '9:15 AM' },
-        ],
-        totalDistance: '58 km',
-        estimatedTime: '2 hr 25 min',
-        color: '#fd79a8',
-    },
-    {
-        id: 'R4', name: 'Route D – Delhi Central',
-        stops: [
-            { name: 'GDGU Campus Gate', lat: 28.2570, lng: 77.0500, time: '6:30 AM' },
-            { name: 'Rajiv Chowk', lat: 28.6328, lng: 77.2197, time: '7:30 AM' },
-            { name: 'Karol Bagh', lat: 28.6514, lng: 77.1907, time: '7:45 AM' },
-            { name: 'Dwarka Sector 21', lat: 28.5562, lng: 77.0593, time: '8:05 AM' },
-            { name: 'GDGU Campus Main', lat: 28.2570, lng: 77.0500, time: '9:30 AM' },
-        ],
-        totalDistance: '80 km',
-        estimatedTime: '3 hr',
-        color: '#fdcb6e',
-    },
-    {
-        id: 'R5', name: 'Route E – Sohna–Palwal Shuttle',
-        stops: [
-            { name: 'GDGU Campus Gate', lat: 28.2570, lng: 77.0500, time: '7:00 AM' },
-            { name: 'Sohna Bus Stand', lat: 28.2430, lng: 77.0680, time: '7:10 AM' },
-            { name: 'Tauru', lat: 28.1880, lng: 76.9520, time: '7:30 AM' },
-            { name: 'Palwal', lat: 28.1445, lng: 77.3286, time: '7:55 AM' },
-            { name: 'GDGU Campus Main', lat: 28.2570, lng: 77.0500, time: '8:45 AM' },
-        ],
-        totalDistance: '45 km',
-        estimatedTime: '1 hr 45 min',
-        color: '#e17055',
-    },
-];
+// Routes – loaded from excelData.json (real GDGU bus routes)
+// Import at runtime for the full stop details
+import excelRoutes from './excelData.json';
 
-// Complaints
+export const routes = excelRoutes.map(r => ({
+    id: r.id,
+    name: r.name,
+    startPoint: r.startPoint,
+    city: r.city,
+    color: r.color,
+    stops: r.stops || [],
+}));
+
+// Complaints (updated to match real route locations)
 export const complaints = [
-    { id: 'CMP001', studentId: 'STU001', studentName: 'Arjun Sharma', busId: 'BUS01', category: 'Driver', subject: 'Rash driving near Subhash Chowk', description: 'The driver was going very fast near Subhash Chowk junction yesterday. It felt unsafe.', status: 'pending', date: '2026-02-20', response: null },
-    { id: 'CMP002', studentId: 'STU002', studentName: 'Priya Patel', busId: 'BUS01', category: 'Seat', subject: 'Broken seat cushion', description: 'Seat B2 has a torn cushion and the spring is poking through. Needs immediate replacement.', status: 'in_progress', date: '2026-02-18', response: 'Maintenance scheduled for this weekend.' },
-    { id: 'CMP003', studentId: 'STU005', studentName: 'Vikram Singh', busId: 'BUS03', category: 'Conductor', subject: 'Rude behavior', description: 'The conductor was very rude when I asked about the route change near Ballabgarh. Unprofessional conduct.', status: 'resolved', date: '2026-02-15', response: 'The conductor has been warned. Thank you for reporting.' },
-    { id: 'CMP004', studentId: 'STU003', studentName: 'Rahul Verma', busId: 'BUS02', category: 'Other', subject: 'Bus arriving late regularly', description: 'Bus GK-02 has been arriving 15-20 minutes late at Saket Metro for the past week. This affects our first class.', status: 'pending', date: '2026-02-22', response: null },
-    { id: 'CMP005', studentId: 'STU001', studentName: 'Arjun Sharma', busId: 'BUS01', category: 'Seat', subject: 'AC not working properly', description: 'The air conditioning on the left side of the bus is not cooling properly on the Sohna Road stretch.', status: 'in_progress', date: '2026-02-24', response: 'Technician will inspect tomorrow.' },
+    { id: 'CMP001', studentId: 'STU001', studentName: 'Arjun Sharma', busId: 'BUS01', category: 'Driver', subject: 'Rash driving near Punjabi Bagh', description: 'The driver was going very fast near Punjabi Bagh Chowk yesterday. Very unsafe during morning rush.', status: 'pending', date: '2026-02-20', response: null },
+    { id: 'CMP002', studentId: 'STU002', studentName: 'Priya Patel', busId: 'BUS02', category: 'Seat', subject: 'Broken seat cushion', description: 'Seat B2 has a torn cushion and the spring is poking through. Needs immediate replacement.', status: 'in_progress', date: '2026-02-18', response: 'Maintenance scheduled for this weekend.' },
+    { id: 'CMP003', studentId: 'STU005', studentName: 'Vikram Singh', busId: 'BUS07', category: 'Conductor', subject: 'Rude behavior by conductor', description: 'The conductor was very rude at Palam Vihar stop when I asked about the route change. Unprofessional conduct.', status: 'resolved', date: '2026-02-15', response: 'The conductor has been warned. Thank you for reporting.' },
+    { id: 'CMP004', studentId: 'STU003', studentName: 'Rahul Verma', busId: 'BUS03', category: 'Other', subject: 'Bus arriving late regularly', description: 'Bus GK-03 has been arriving 15-20 minutes late at Hauz Khas Metro for the past week. This affects our first class.', status: 'pending', date: '2026-02-22', response: null },
+    { id: 'CMP005', studentId: 'STU001', studentName: 'Arjun Sharma', busId: 'BUS01', category: 'Seat', subject: 'AC not working properly', description: 'The air conditioning on the left side of the bus is not cooling properly on the Delhi Cant stretch.', status: 'in_progress', date: '2026-02-24', response: 'Technician will inspect tomorrow.' },
 ];
 
 // Seat layouts for buses (2+2 configuration with aisle, last row 3 seats)
 // 12 rows × 4 seats = 48, + 1 last row × 3 seats = 51 total
 export function generateSeatLayout(busId, capacity) {
-    const fullRows = Math.floor(capacity / 4);      // 12 full rows
-    const lastRowSeats = capacity % 4;               // 3 remaining seats
+    const fullRows = Math.floor(capacity / 4);
+    const lastRowSeats = capacity % 4;
     const layout = [];
     const bookedSeats = getBookedSeats(busId);
     const labels = ['A', 'B', 'C', 'D'];
 
-    // Full rows (4 seats each)
     for (let r = 0; r < fullRows; r++) {
         const row = [];
         for (let s = 0; s < 4; s++) {
@@ -141,7 +92,6 @@ export function generateSeatLayout(busId, capacity) {
         layout.push(row);
     }
 
-    // Last row (3 seats for 51-seat buses)
     if (lastRowSeats > 0) {
         const row = [];
         const lastRowNum = fullRows + 1;
@@ -187,11 +137,17 @@ export const feeStructure = {
     paymentMethods: ['Online Banking', 'UPI', 'Campus Counter'],
 };
 
-// Simulated bus positions (for live tracking, near GD Goenka / Sohna / Gurugram)
+// Simulated bus positions (spread across NCR near real routes)
 export const busPositions = {
-    BUS01: { lat: 28.4200, lng: 77.0450, heading: 180, speed: 35 },
-    BUS02: { lat: 28.5230, lng: 77.1900, heading: 120, speed: 28 },
-    BUS03: { lat: 28.3400, lng: 77.3200, heading: 200, speed: 40 },
-    BUS04: { lat: 28.2570, lng: 77.0500, heading: 0, speed: 0 },
-    BUS05: { lat: 28.2400, lng: 77.0650, heading: 300, speed: 32 },
+    BUS01: { lat: 28.7041, lng: 77.1025, heading: 200, speed: 35 },   // Near Rohini, Delhi
+    BUS02: { lat: 28.6328, lng: 77.2197, heading: 210, speed: 30 },   // Near Connaught Place
+    BUS03: { lat: 28.5494, lng: 77.2001, heading: 190, speed: 38 },   // Near Hauz Khas
+    BUS04: { lat: 28.5095, lng: 77.1735, heading: 220, speed: 32 },   // Near Chatterpur
+    BUS05: { lat: 28.6219, lng: 77.0808, heading: 180, speed: 28 },   // Near Janakpuri
+    BUS06: { lat: 28.5562, lng: 77.0593, heading: 190, speed: 40 },   // Near Dwarka
+    BUS07: { lat: 28.6126, lng: 76.9828, heading: 160, speed: 33 },   // Near Najafgarh
+    BUS08: { lat: 28.4595, lng: 77.0266, heading: 175, speed: 25 },   // Gurugram city
+    BUS09: { lat: 28.4595, lng: 77.0725, heading: 185, speed: 36 },   // Near HUDA City Center
+    BUS10: { lat: 28.3700, lng: 77.0500, heading: 195, speed: 42 },   // Near Manesar
+    BUS11: { lat: 28.3424, lng: 77.3221, heading: 240, speed: 30 },   // Near Ballabhgarh
 };
