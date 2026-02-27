@@ -32,7 +32,7 @@ if (!supabaseRealUrl || !supabaseAnonKey) {
 }
 
 export const supabase = supabaseRealUrl && supabaseAnonKey
-    ? createClient(supabaseProxyUrl, supabaseAnonKey, {
+    ? createClient(supabaseRealUrl, supabaseAnonKey, {
         auth: {
             persistSession: true,
             autoRefreshToken: true,
