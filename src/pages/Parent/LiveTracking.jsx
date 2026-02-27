@@ -91,7 +91,7 @@ export default function LiveTracking() {
                     transition={{ delay: 0.2 }}
                 >
                     <div className="map-container" style={{ height: '500px' }}>
-                        <MapContainer center={[busPos.lat, busPos.lng]} zoom={14} style={{ height: '100%', width: '100%' }} zoomControl={true} scrollWheelZoom={true} doubleClickZoom={true} touchZoom={true}>
+                        <MapContainer center={[busPos.lat, busPos.lng]} zoom={14} style={{ height: '100%', width: '100%' }} zoomControl={true} scrollWheelZoom={false} doubleClickZoom={true} touchZoom={true}>
                             <TileLayer url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png" />
                             <Marker position={[busPos.lat, busPos.lng]} icon={createBusIcon()}>
                                 <Popup><strong>{bus.number}</strong><br />Speed: {busPos.speed} km/h</Popup>

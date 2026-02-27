@@ -93,7 +93,7 @@ export default function BusTracking() {
                             zoom={13}
                             style={{ height: '100%', width: '100%' }}
                             zoomControl={true}
-                            scrollWheelZoom={true}
+                            scrollWheelZoom={false}
                             doubleClickZoom={true}
                             touchZoom={true}
                         >
