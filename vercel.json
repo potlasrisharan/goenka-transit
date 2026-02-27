@@ -46,6 +46,10 @@
     ],
     "rewrites": [
         {
+            "source": "/api/supabase/:match*",
+            "destination": "https://iuqrkpoecjqovhvotyit.supabase.co/:match*"
+        },
+        {
             "source": "/((?!assets/).*)",
             "destination": "/index.html"
         }

@@ -114,12 +114,14 @@ export function TransportProvider({ children }) {
                 const bRes = await supabase.from('buses').select('*');
                 const dRes = await supabase.from('drivers').select('*');
                 const sRes = await supabase.from('students').select('*');
-                const cRes = await supabase.from('complaints').select('*').order('created_at', { ascending: false });
+                const cRes = await supabase.from('complaints').select('*');
                 const stRes = await supabase.from('seats').select('*');
                 const stopsRes = await supabase.from('stops').select('*').order('stop_order', { ascending: true });
-                const bcrRes = await supabase.from('bus_change_requests').select('*').order('created_at', { ascending: false });
-                const ivRes = await supabase.from('industrial_visits').select('*').order('created_at', { ascending: false });
+                const bcrRes = await supabase.from('bus_change_requests').select('*');
+                const ivRes = await supabase.from('industrial_visits').select('*');
                 let used = false;
+                if (rRes.error) console.error('[Supabase Fetch Error - routes]:', rRes.error);
+                if (stopsRes.error) console.error('[Supabase Fetch Error - stops]:', stopsRes.error);
                 if (!rRes.error && rRes.data.length > 0) {
                     // Attach stops to routes
                     const stopsData = (!stopsRes.error && stopsRes.data) || [];
@@ -133,6 +135,7 @@ export function TransportProvider({ children }) {
                     setStops(stopsData);
                     used = true;
                 }
+                if (bRes.error) console.error('[Supabase Fetch Error - buses]:', bRes.error);
                 if (!bRes.error && bRes.data.length > 0) {
                     const fetchedBuses = bRes.data.map(b => ({
                         id: b.id, number: b.number || b.id, name: b.name || b.id,
@@ -158,6 +161,7 @@ export function TransportProvider({ children }) {
 
                     used = true;
                 }
+                if (dRes.error) console.error('[Supabase Fetch Error - drivers]:', dRes.error);
                 if (!dRes.error && dRes.data.length > 0) {
                     setDrivers(dRes.data.map(d => ({
                         id: d.id, name: d.name, phone: d.phone || '—', busId: d.bus_id,
@@ -167,6 +171,7 @@ export function TransportProvider({ children }) {
                     })));
                     used = true;
                 }
+                if (sRes.error) console.error('[Supabase Fetch Error - students]:', sRes.error);
                 if (!sRes.error && sRes.data.length > 0) {
                     setStudents(sRes.data.map(s => ({
                         id: s.id, name: s.name, email: s.email || '—', phone: s.phone || '—',
@@ -175,8 +180,11 @@ export function TransportProvider({ children }) {
                     })));
                     used = true;
                 }
+                if (cRes.error) console.error('[Supabase Fetch Error - complaints]:', cRes.error);
                 if (!cRes.error && cRes.data.length > 0) {
-                    setComplaints(cRes.data.map(c => ({
+                    let rawComplaints = cRes.data || [];
+                    rawComplaints.sort((a, b) => new Date(b.created_at || '1970-01-01') - new Date(a.created_at || '1970-01-01'));
+                    setComplaints(rawComplaints.map(c => ({
                         id: c.id, studentId: c.student_id, studentName: c.student_name || '—',
                         busId: c.bus_id, category: c.category || 'Other',
                         subject: c.subject || c.message?.substring(0, 50) || '—',
@@ -196,8 +204,12 @@ export function TransportProvider({ children }) {
                     });
                     setSeatBookings(bookingMap);
                 }
+                if (bcrRes.error) console.error('[Supabase Fetch Error - bus_change_requests]:', bcrRes.error);
                 if (!bcrRes.error) {
-                    setBusChangeRequests((bcrRes.data || []).map(r => ({
+                    let rawData = bcrRes.data || [];
+                    // Sort in-memory instead of DB to prevent missing created_at column crashes
+                    rawData.sort((a, b) => new Date(b.created_at || '1970-01-01') - new Date(a.created_at || '1970-01-01'));
+                    setBusChangeRequests(rawData.map(r => ({
                         ...r,
                         studentId: r.student_id || r.studentId,
                         studentName: r.student_name || r.studentName,
@@ -209,8 +221,11 @@ export function TransportProvider({ children }) {
                     })));
                     used = true;
                 }
+                if (ivRes.error) console.error('[Supabase Fetch Error - industrial_visits]:', ivRes.error);
                 if (!ivRes.error) {
-                    setVisits((ivRes.data || []).map(v => ({
+                    let rawVisits = ivRes.data || [];
+                    rawVisits.sort((a, b) => new Date(b.created_at || '1970-01-01') - new Date(a.created_at || '1970-01-01'));
+                    setVisits(rawVisits.map(v => ({
                         id: v.id, facultyId: v.faculty_id, facultyName: v.faculty_name,
                         destination: v.destination, date: v.visit_date, students: v.num_students,
                         purpose: v.purpose, status: v.status, busAssigned: v.bus_assigned,

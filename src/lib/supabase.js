@@ -17,10 +17,13 @@ import { createClient } from '@supabase/supabase-js';
  *   const { data, error } = await supabase.from('routes').select('*');
  */
 
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL?.trim();
+const supabaseRealUrl = import.meta.env.VITE_SUPABASE_URL?.trim();
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY?.trim();
 
-if (!supabaseUrl || !supabaseAnonKey) {
+// Use the exact same domain the user is currently on (Vercel proxy) to bypass Mobile ISP / Safari Tracker blocking
+const supabaseProxyUrl = typeof window !== 'undefined' ? `${window.location.origin}/api/supabase` : supabaseRealUrl;
+
+if (!supabaseRealUrl || !supabaseAnonKey) {
     console.warn(
         '[Goenka Transit] Supabase credentials not found.\n' +
         'Please set VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY in your .env file.\n' +
@@ -28,8 +31,8 @@ if (!supabaseUrl || !supabaseAnonKey) {
     );
 }
 
-export const supabase = supabaseUrl && supabaseAnonKey
-    ? createClient(supabaseUrl, supabaseAnonKey, {
+export const supabase = supabaseRealUrl && supabaseAnonKey
+    ? createClient(supabaseProxyUrl, supabaseAnonKey, {
         auth: {
             persistSession: true,
             autoRefreshToken: true,
